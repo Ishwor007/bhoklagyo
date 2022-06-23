@@ -1,38 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends './base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VokLagyo</title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-
-<body>
-    <!-- header start -->
-    <header>
-        <nav class="navbar">
-            <a href="./index.html" class="nav-branding">Voklagyo</a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Add Restaurent </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./login.html" class="nav-link">Login</a>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
-    <!-- header end -->
+{% block title %} BhokLagyo {% endblock %}
+{% block content %}
 
     <!-- content start -->
     <div class="container">
@@ -56,9 +26,4 @@
         </div>
 
     </div>
-
-    <!-- content end -->
-    <script src="./js/script.js"></script>
-</body>
-
-</html>
+{% endblock %}
