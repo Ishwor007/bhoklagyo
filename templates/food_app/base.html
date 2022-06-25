@@ -8,13 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static './css/style.css' %}">
+        <link rel="stylesheet" href="{% static './css/footer.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 
 <body>
     <!-- header start -->
     <header>
         <nav class="navbar">
-            <a href="/" class="nav-branding">Voklagyo</a>
+            <a href="/" class="nav-branding">Bhoklagyo</a>
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="#" class="nav-link">Add Restaurent </a>
@@ -39,6 +41,49 @@
     {% endblock %}
 
 <!--    footer start-->
+    <footer class="footer">
+        <div class="container-80">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our services</a></li>
+                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#">Affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">shipping</a></li>
+                        <li><a href="#">returns</a></li>
+                        <li><a href="#">order status</a></li>
+                        <li><a href="#">payment options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Online restaurent</h4>
+                    <ul>
+                        <li><a href="#">nanglo</a></li>
+                        <li><a href="#">foodlang</a></li>
+                        <li><a href="#">red roof</a></li>
+                        <li><a href="#">pizza virus</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <ul>
+                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="color:#fff; margin-bottom:-10px;">&copy; BhokLagyo 2022</div>
+        </div>
+    </footer>
 <!--    footer end-->
     <script src="{% static './js/script.js' %}"></script>
 </body>

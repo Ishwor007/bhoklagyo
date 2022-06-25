@@ -6,7 +6,7 @@
     font-family: 'Roboto', sans-serif;
 }
 body{
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
 /* navbar start */
@@ -159,6 +159,7 @@ a{
     border-radius: 10px;
     border: none;
     padding: 0 10px;
+    cursor: pointer;
 }
 
 /* content end */
