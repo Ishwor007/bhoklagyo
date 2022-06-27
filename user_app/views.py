@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.core.exceptions import ObjectDoesNotExist
 from authentication_app import views as auth_views
-#from django.contrib.auth.models import login, authenticate
 from .models import User
 from django.contrib.auth.hashers import make_password, check_password
 
