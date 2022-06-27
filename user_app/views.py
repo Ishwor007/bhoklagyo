@@ -1,8 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.core.exceptions import ObjectDoesNotExist
-
+from authentication_app import views as auth_views
 #from django.contrib.auth.models import login, authenticate
 from .models import User
 from django.contrib.auth.hashers import make_password, check_password
@@ -27,20 +27,14 @@ def register(request):
         except ObjectDoesNotExist:
             user=None
         print(user)
-        if user:
+        if user: 
             message = messages.error(request, "User with provided info already exists.")
             return render(request,'user_app/signup.html',{'message':message})
         else:
-            user = User.objects.create(first_name=first_name,
-                                       last_name=last_name,
-                                       email=email,
-                                       phone=phone,
-                                       password=password)
-
-           # authenticate_user = authenticate(user.phone, user.password)
-           # login(request, authenticate_user)
-
-            return redirect("landing_page")
+            otp = auth_views.send_otp_via_email(email)
+            user_list = [first_name,last_name,email,phone,password,otp]
+            request.session["user_list"]=user_list
+            return redirect(auth_views.validateOtp)
             
     else:
         return HttpResponse('signup')

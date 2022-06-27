@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/otp.css' %}">
+</head>
+
+<body>
+    <div class="container-80">
+        <div class="row">
+            <div class="col-otp">
+                <h2>Validate OTP (One Time Password)</h2>
+                <hr style="width:100%; margin: 10px 0;">
+                <h4>Enter your OTP you have received.</h4>
+                <form action="/authentication_app/otp/" method ="POST">
+                    {% csrf_token %}
+                    <div class="inputBox">
+                        <input type="text" name="otp">
+                    </div>
+                    <div class="validateBox">
+                        <button type="submit">Validate</button>
+                    </div>
+                    <div class="resendOTP">
+                        <a href="#">Resend OTP</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
