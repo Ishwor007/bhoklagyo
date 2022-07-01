@@ -1,14 +1,35 @@
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
-# Create your models here.
-class User(models.Model):
-    first_name = models.CharField(max_length=15)
-    last_name = models.CharField(max_length=15)
-    email = models.EmailField(max_length=254)
-    phone = models.CharField(max_length=14)
-    password = models.CharField(max_length=200)
-    #confirm_password = models.CharField(max_length=15)
-    #otp = models.CharField(max_length=6)
-    
+
+from django.contrib.auth.models import AbstractUser
+
+
+# user relation
+class User(AbstractUser):
+    RESTAURANT_ADMIN =1 
+    CUSTOMER =2 
+
+    ROLE_CHOICES = (
+        (RESTAURANT_ADMIN,'Admin'),
+        (CUSTOMER, 'Customer'),
+    )
+
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True, default=CUSTOMER)
+
+
+class Customer(User):
+    phone = models.CharField(max_length=14, unique=True)
+
+    is_superuser = False 
+    is_staff = False
+    is_active = True 
+
+    USERNAME_FIELD: str ='phone'
+
+    class Meta:
+        verbose_name = 'Customer'
+        
+
+    def __str__(self):
+        return self.first_name
+
+

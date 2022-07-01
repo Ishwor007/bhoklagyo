@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render,redirect
 from food_app.views import landing_page
-from user_app.models import User
+from user_app.models import Customer
 from django.http import HttpResponse
 from user_app import views as user_view
 from django.core.exceptions import ObjectDoesNotExist
@@ -33,7 +33,7 @@ def validateOtp(request):
     else:
         userotp = request.POST['otp']
         if generatedotp == userotp:
-            user_check = User.objects.all()
+            user_check = Customer.objects.all()
             for user in user_check:
                 check_user_phone = user.phone
                 if check_user_phone == phone:
@@ -44,7 +44,7 @@ def validateOtp(request):
                 print("user exist")
                 return HttpResponse("user already created")
             else:
-                user = User.objects.create(first_name=first_name,
+                user = Customer.objects.create(first_name=first_name,
                                        last_name=last_name,
                                        email=email,
                                        phone=phone,

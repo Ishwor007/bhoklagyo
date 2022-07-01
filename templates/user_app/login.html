@@ -1,42 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'food_app/base.html' %}
 {% load static %}
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login | VokLagyo</title>
-  <link rel="stylesheet" href="{%static 'css/login.css' %}">
-  <link rel="stylesheet" href="{%static 'css/style.css' %}">
-</head>
-
-<body>
-  <!-- header start -->
-  <header>
-    <nav class="navbar">
-      <a href=" /" class="nav-branding">Voklagyo</a>
-      <ul class="nav-menu">
-        <li class="nav-item">
-          <a href="#" class="nav-link">Add Restaurent </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Services</a>
-        </li>
-        <li class="nav-item">
-          <a href="/user_app/signup" class="nav-link">signup</a>
-        </li>
-      </ul>
-      <div class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-    </nav>
-  </header>
-  <!-- header end -->
-
-
   <!-- login start -->
+{% block title %} Login | Bhoklagyo {% endblock %}
+
+{% block content %}
   <section>
     <div class="imgBx">
       <img src="./images/login-side.jpg" alt="">
@@ -78,9 +45,5 @@
     </div>
   </section>
 <!-- login end -->
-
-<script src="./js/script.js"></script>
-</body>
-
-</html>
+{% endblock %}
 

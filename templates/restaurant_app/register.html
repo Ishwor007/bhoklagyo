@@ -1,0 +1,25 @@
+{% extends 'food_app/base.html' %}
+
+{% load static %}
+{% block title %} Register | Bhoklagyo {% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" name="name" placeholder="Restaurant Name" required/>
+
+    <label for="location">Location</label>
+    <input type="text" name="location" placeholder="Location" required/>
+    
+    <label for="phone">Phone</label>
+    <input type="tel" name="phone" placeholder="Contact Number" required/>
+    
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="Location"/>
+
+    <button type="submit" name="submit-btn">Submit Form</button>
+
+</form>
+
+{% endblock %}
