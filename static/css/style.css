@@ -5,9 +5,7 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
-body{
-    overflow-x:hidden;
-}
+
 
 /* navbar start */
 header{
@@ -161,7 +159,14 @@ a{
     padding: 0 10px;
     cursor: pointer;
 }
-
+.main{
+padding:0;
+margin:0;
+width: 100%;
+display: flex;
+flex-direction: column;
+top: -20px;
+}
 /* content end */
 
 /* responsive for landing page start */

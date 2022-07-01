@@ -9,12 +9,14 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static './css/style.css' %}">
         <link rel="stylesheet" href="{% static './css/footer.css' %}">
+    <link rel="stylesheet" href="{% static './css/login.css' %}">
+    <link rel="stylesheet" href="{% static './css/otp.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 
 <body>
     <!-- header start -->
-    <header>
+    <header class="header">
         <nav class="navbar">
             <a href="/" class="nav-branding">Bhoklagyo</a>
             <ul class="nav-menu">
@@ -25,7 +27,7 @@
                     <a href="#" class="nav-link">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a href="user_app/login" class="nav-link">Login</a>
+                    <a href="/user_app/login" class="nav-link">Login</a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -36,9 +38,16 @@
         </nav>
     </header>
     <!-- header end -->
+    <main class="main">
+    {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+    {% endfor %}</ul>
+    {% endif %}
 
     {% block content %}
     {% endblock %}
+    </main>
 
 <!--    footer start-->
     <footer class="footer">

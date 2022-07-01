@@ -1,4 +1,5 @@
 from django.db import models
+
 from django.contrib.auth.models import AbstractUser
 
 # user relation
@@ -21,7 +22,13 @@ class Customer(User):
     is_staff = False
     is_active = True 
 
-    USERNAME_FIELD: str ='phone' 
+
+    USERNAME_FIELD: str ='phone'
+
+    class Meta:
+        verbose_name = 'Customer'
+        
 
     def __str__(self):
         return self.first_name
+

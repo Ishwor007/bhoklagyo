@@ -1,9 +1,12 @@
 from django.http import HttpRequest, HttpResponse
 from django.contrib import messages
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render,redirect
 from django.core.exceptions import ObjectDoesNotExist
+
 from authentication_app import views as auth_views
-from .models import Customer
+from user_app.models import Customer
+
 from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
@@ -14,7 +17,7 @@ def signup_page(request):
 def login_page(request):
     return render(request,'user_app/login.html')
 
-def register(request):
+def register_customer(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -25,8 +28,9 @@ def register(request):
             user = Customer.objects.get(phone=phone)
         except ObjectDoesNotExist:
             user=None
-        if user: 
-            message = messages.error(request, "User with provided info already exists.")
+
+        if user:
+            message = messages.error(request, "User with provided phone number already exists.")
             return render(request,'user_app/signup.html',{'message':message})
         else:
             otp = auth_views.send_otp_via_email(email)
@@ -37,20 +41,17 @@ def register(request):
     else:
         return HttpResponse('signup')
 
+
+
 def login_user(request):
     if request.method=='POST':
         phone = request.POST['phone']
         pass_key = request.POST['password']
-        print(phone, pass_key)
 
-        user = Customer.objects.get(phone=phone)
+
+        user = authenticate(phone=phone, password=pass_key)
         if user:
-            password = user.password
-            if check_password(pass_key, password):
-                return HttpResponse(password)
-            else:
-                return HttpResponse("suck")
-            # login(request, user)
+            login(request, user)
+            redirect('landing_page')
         else:
-            return HttpResponse("user not found")
-
+            raise ObjectDoesNotExist("This user does not exist. Check phone and password.")

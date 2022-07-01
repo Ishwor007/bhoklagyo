@@ -7,16 +7,18 @@
 }
 
 section{
-    position: relative;
+box-sizing: border-box;
     width: 100%;
     height: 90vh;
     display: flex;
+    position: relative;
     /* background: darkgrey; */
 }
-section .imgBx{
+.section .imgBx{
     position: relative;
     width: 50%;
     height: 100%;
+    position:absolute;
 }
 section .imgBx:before{
     content:"";
@@ -26,8 +28,8 @@ section .imgBx:before{
     height: 100%;
     width: 100%;
     background: linear-gradient(255deg,#e91e63,#03a9f4);
-    z-index: 1;
     mix-blend-mode: screen;
+
 }
 section .imgBx img{
     position: absolute;
@@ -37,7 +39,11 @@ section .imgBx img{
     height:100%;
     object-fit: cover;
 }
-
+section .formBx{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
 section .contentBx{
     width: 50%;
     height: 100vh;
@@ -47,6 +53,7 @@ section .contentBx{
 }
 
 section .contentBx .formBx{
+    position: absolute;
     width: 50%;
 }
 section .contentBx .formBx h2{
