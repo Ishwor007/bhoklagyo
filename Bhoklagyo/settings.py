@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'recommendation_app',
     'restaurant_app',
     'user_app',
+    'authentication_app'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Bhoklagyo.urls'
@@ -131,6 +134,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
 
+AUTH_USER_MODEL = 'user_app.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -138,3 +142,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "bhoklagyo2@gmail.com"
 EMAIL_HOST_PASSWORD = "tkrubtmqatforwhd"
+
+SESSION_EXPIRE_SECONDS = 300
+SESSION_TIMEOUT_REDIRECT = "/user_app/signup"
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True

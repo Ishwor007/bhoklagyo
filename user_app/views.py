@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.core.exceptions import ObjectDoesNotExist
 from authentication_app import views as auth_views
-from .models import User
+from .models import Customer
 from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
@@ -22,10 +22,9 @@ def register(request):
         phone = request.POST['phone']
         password = make_password(request.POST['password'])
         try:
-            user = User.objects.get(phone=phone)
+            user = Customer.objects.get(phone=phone)
         except ObjectDoesNotExist:
             user=None
-        print(user)
         if user: 
             message = messages.error(request, "User with provided info already exists.")
             return render(request,'user_app/signup.html',{'message':message})
@@ -44,7 +43,7 @@ def login_user(request):
         pass_key = request.POST['password']
         print(phone, pass_key)
 
-        user = User.objects.get(phone=phone)
+        user = Customer.objects.get(phone=phone)
         if user:
             password = user.password
             if check_password(pass_key, password):
