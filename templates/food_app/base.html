@@ -20,15 +20,26 @@
         <nav class="navbar">
             <a href="/" class="nav-branding">Bhoklagyo</a>
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Add Restaurent </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">Services</a>
                 </li>
-                <li class="nav-item">
-                    <a href="/user_app/login" class="nav-link">Login</a>
-                </li>
+                {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/user_app/login" class="nav-link">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'register-restaurant-form' %}" class="nav-link">Add Restaurent </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url '' %}" class="nav-link">Menu</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/user_app/logout" class="nav-link">Log out</a>
+                    </li>
+                {% endif %}
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
