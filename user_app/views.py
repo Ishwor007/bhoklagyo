@@ -1,13 +1,14 @@
-from django.http import HttpRequest, HttpResponse
-from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ObjectDoesNotExist
+
 
 from authentication_app import views as auth_views
 from user_app.models import Customer
 
-from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -54,4 +55,8 @@ def login_user(request):
             login(request, user)
             redirect('landing_page')
         else:
-            raise ObjectDoesNotExist("This user does not exist. Check phone and password.")
+            return HttpResponse(f"This user does not exist. Check phone and password.")
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
