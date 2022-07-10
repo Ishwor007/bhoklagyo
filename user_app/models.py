@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 # user relation
 class User(AbstractUser):
+    username = None
+    
     RESTAURANT_ADMIN =1 
     CUSTOMER =2 
 
@@ -12,12 +14,15 @@ class User(AbstractUser):
         (CUSTOMER, 'Customer'),
     )
 
-    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True, default=CUSTOMER)
+    email = models.EmailField(max_length=255, unique=True)
+    phone = models.CharField(max_length=14, unique=True)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, default=CUSTOMER)
+    USERNAME_FIELD: str ='email'
+    REQUIRED_FIELDS: list =['password','phone']
 
+    
 
 class Customer(User):
-    phone = models.CharField(max_length=14, unique=True)
-
     is_superuser = False 
     is_staff = False
     is_active = True 
