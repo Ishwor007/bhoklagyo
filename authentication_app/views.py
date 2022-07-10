@@ -5,11 +5,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render,redirect
 from food_app.views import landing_page
-<<<<<<< HEAD
 from user_app.models import Customer, User
-=======
-from user_app.models import Customer
->>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
 from django.http import HttpResponse
 from user_app import views as user_view
 from django.core.exceptions import ObjectDoesNotExist
