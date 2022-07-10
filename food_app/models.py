@@ -16,7 +16,7 @@ class Rating(models.Model):
     user = models.ForeignKey(to=Customer, on_delete=models.DO_NOTHING)
     food = models.ForeignKey(to=Food, on_delete=models.DO_NOTHING)
     rate = models.SmallIntegerField()
-    rate_on = models.DateTimeField(auto_now_add=True)
+    rate_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.food}-{self.id}"
