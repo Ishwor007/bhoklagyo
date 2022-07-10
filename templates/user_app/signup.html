@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'food_app/base.html' %}
 {% load static %}
+<<<<<<< HEAD
 
 
 <head>
@@ -37,12 +37,13 @@
   </header>
   <!-- header end -->
 
+=======
+{% block title %}Signup | Bhoklagyo {% endblock %}
+>>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
 
+{% block content %}
   <!-- signup start -->
   <section>
-    {% if message %}
-      <span style="background-color:#FF4510">{{m}}</span>
-    {% endif %}
     <div class="imgBx">
       <img src="{% static 'images/login-side.jpg' %}" alt="">
     </div>
@@ -73,10 +74,10 @@
           </div>
           <div class="inputBx">
             <span>Confirm Password</span>
-            <input type="password" id="second_pass" name="" />
+            <input type="password" id="second_pass" name="c_password" />
           </div>
           <div class="inputBx">
-            <input type="submit" value="Sign up" name="submit" />
+            <input type="submit" value="Sign up" name="submit" onClick="validatePassword();"/>
           </div>
           <div class="inputBx">
             <p>Already have an account? <a href="/user_app/login">Login</a></p>
@@ -93,10 +94,7 @@
     </div>
   </section>
   <!-- signup end -->
-  <script src="./js/script.js"></script>
+{% endblock %}
 
-</body>
-<!-- <script src="./js/signupValidation.js"></script> -->
 
-</html>
 

@@ -1,7 +1,10 @@
 from django.contrib import admin
-from user_app.models import User,Customer
-# Register your models here.
-# class UserAdmin(admin.ModelAdmin):
-#     list_display = ['first_name','last_name','email','phone','password',]
-admin.site.register(User)
+
+from user_app.models import Customer, User
+from django.contrib.auth.admin import UserAdmin
+
+class CustomUserAdmin(UserAdmin):
+    ordering = ('email','phone',)
+    
+admin.site.register(User, CustomUserAdmin)
 admin.site.register(Customer)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     
     'django.contrib.sites',
     
@@ -49,8 +50,12 @@ INSTALLED_APPS = [
 
 
     
+=======
+
+>>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
     'Bhoklagyo',
     'food_app',
+    'order_app',
     'recommendation_app',
     'restaurant_app',
     'user_app',
@@ -133,6 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -153,7 +159,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
 
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 AUTH_USER_MODEL = 'user_app.User'
+LOGOUT_REDIRECT_URL='user_app/login'
+LOGIN_REDIRECT_URL = ''
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
