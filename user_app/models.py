@@ -19,22 +19,14 @@ class User(AbstractUser):
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, default=CUSTOMER)
     USERNAME_FIELD: str ='email'
     REQUIRED_FIELDS: list =['password','phone']
-
-<<<<<<< HEAD
-=======
-    
-
->>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
 class Customer(User):
     is_superuser = False 
     is_staff = False
     is_active = True 
 
-<<<<<<< HEAD
     USERNAME_FIELD: str ='phone' 
     class Meta:
         db_table = 'Customer'
-=======
 
     USERNAME_FIELD: str ='phone'
 
@@ -42,7 +34,6 @@ class Customer(User):
         verbose_name = 'Customer'
         
 
->>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
     def __str__(self):
         return self.first_name
 
