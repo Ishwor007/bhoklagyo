@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     
     'django.contrib.sites',
     
@@ -50,9 +49,6 @@ INSTALLED_APPS = [
 
 
     
-=======
-
->>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
     'Bhoklagyo',
     'food_app',
     'order_app',
