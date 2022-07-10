@@ -1,9 +1,12 @@
 from django.urls import path
 
-from .views import login_admin, register_admin, register_restaurant
+from . import views as restaurant_views
 
 urlpatterns = [
-    path('register-admin', register_admin),
-    path('register-restaurant', register_restaurant),
-    path('login-admin', login_admin),
+    # path('', restaurant_views.show_menu, name = 'show_menu'),
+    path('register-admin', restaurant_views.register_admin, name = 'register-restaurant-admin'),
+    path('register-restaurant-form', restaurant_views.register_restaurant_form, name='register-restaurant-form'),
+    path('register-restaurant', restaurant_views.register_restaurant, name='register-restaurant'),
+    path('login-restaurant', restaurant_views.login_admin, name = 'login-restaurant'),
+    # path('update_menu/<str:id>',restaurant_views.update_item, name = 'update-menu'),
 ]
