@@ -20,6 +20,7 @@ def send_otp_via_email(email):
     return otp
 
 def validateOtp(request):
+    valid_phone=False
     try:
         user_list=request.session["user_list"]
         first_name = user_list[0]
