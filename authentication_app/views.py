@@ -39,7 +39,6 @@ def validateOtp(request):
         return render(request, 'authentication_app/otp.html')
     else:
         userotp = request.POST['otp']
-<<<<<<< HEAD
         if generatedotp == userotp :
             user_check = User.objects.all()
             if not user_check:
@@ -67,7 +66,6 @@ def validateOtp(request):
                     return redirect(user_view.login_page)
         else:
             return HttpResponse("your otp is wrong")
-=======
         if generatedotp == userotp:
             user_check = Customer.objects.all()
             for user in user_check:
@@ -87,7 +85,6 @@ def validateOtp(request):
                                        password=password)
 
                 return redirect(user_view.login_page)
->>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
         
 def resend_otp(request):
     user_list = request.session['user_list']
