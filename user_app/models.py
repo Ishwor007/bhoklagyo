@@ -13,7 +13,6 @@ class User(AbstractUser):
 
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True, default=CUSTOMER)
 
-
 class Customer(User):
     phone = models.CharField(max_length=14, unique=True)
 
@@ -22,6 +21,7 @@ class Customer(User):
     is_active = True 
 
     USERNAME_FIELD: str ='phone' 
-
+    class Meta:
+        db_table = 'Customer'
     def __str__(self):
         return self.first_name

@@ -24,9 +24,21 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">Services</a>
                 </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="user_app/logout/" class="nav-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">My Cart </a>
+                </li>
+                <li class="nav-item">
+                    <p>welcome,{{user.first_name}}
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a href="user_app/login" class="nav-link">Login</a>
                 </li>
+                {% endif %}
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>

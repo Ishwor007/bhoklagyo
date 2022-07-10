@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.core.exceptions import ObjectDoesNotExist
 from authentication_app import views as auth_views
-from .models import Customer
+from .models import Customer,User
 from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
@@ -54,3 +54,6 @@ def login_user(request):
         else:
             return HttpResponse("user not found")
 
+def logout(request):
+    User.is_authenticated = False
+    return redirect('landing_page')
