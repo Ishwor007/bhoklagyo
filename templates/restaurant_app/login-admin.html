@@ -4,10 +4,10 @@
 {% block title %} Restaurant | Bhoklagyo {% endblock %}
 
 {% block content%}
-<form action="" method="post">
+<form method="post">
     {% csrf_token %}
-    <label for="phone">Phone</label>
-    <input type="tel" name="phone" placeholder="9XXXXXXXXXX" required/>
+    <label for="email">Email</label>
+    <input type="email" name="email" required/>
     
     <label for="password">Password</label>
     <input type="password" name="password"/>

@@ -4,7 +4,7 @@
 {% block title %} Register | Bhoklagyo {% endblock %}
 
 {% block content %}
-<form action="" method="post">
+<form method="POST">
     {% csrf_token %}
     <label for="name">Name</label>
     <input type="text" name="name" placeholder="Restaurant Name" required/>
@@ -13,10 +13,10 @@
     <input type="text" name="location" placeholder="Location" required/>
     
     <label for="phone">Phone</label>
-    <input type="tel" name="phone" placeholder="Contact Number" required/>
-    
+    <input type="tel" name="phone" placeholder="9xxxxxxxxx" pattern="9[0-9]{9}" required/>
+
     <label for="email">Email</label>
-    <input type="email" name="email" placeholder="Location"/>
+    <input type="email" name="email"required/>
 
     <button type="submit" name="submit-btn">Submit Form</button>
 
