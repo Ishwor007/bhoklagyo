@@ -23,5 +23,7 @@ urlpatterns = [
     path('', food_views.landing_page, name ='landing_page'),
     path('user_app/',include('user_app.urls')),
     path('authentication_app/', include('authentication_app.urls')),
+    path('accounts/', include('allauth.urls')),
+
     path('restaurant_app/', include('restaurant_app.urls')),
 ]

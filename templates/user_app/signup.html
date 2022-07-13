@@ -1,6 +1,45 @@
 {% extends 'food_app/base.html' %}
 {% load static %}
+<<<<<<< HEAD
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>signup | VokLagyo</title>
+  <link rel="stylesheet" href="{%static 'css/login.css' %}">
+  <link rel="stylesheet" href="{%static 'css/style.css' %}">
+</head>
+
+<body>
+  <!-- header start -->
+  <header>
+    <nav class="navbar">
+      <a href="/" class="nav-branding">Voklagyo</a>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link">Add Restaurent </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="/user_app/login" class="nav-link">Login</a>
+        </li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+  </header>
+  <!-- header end -->
+
+=======
 {% block title %}Signup | Bhoklagyo {% endblock %}
+>>>>>>> 63ee10633c87db03871ccf52caa2c8e7bd79eecd
 
 {% block content %}
   <!-- signup start -->
@@ -46,8 +85,8 @@
         </form>
         <h3>Or signup with</h3>
         <ul class="soc">
-          <li class='facebook'><span>Facebook</span></li>
-          <li class="google"><span>Google</span></li>
+          <a href =""><li class='facebook'><span>Facebook</span></li></a>
+          <a href =""><li class="google"><span>Google</span></li></a>
         </ul>
 
       </div>

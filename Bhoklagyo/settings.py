@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'django.contrib.sites',
+    
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 
+
+    
     'Bhoklagyo',
     'food_app',
     'order_app',
@@ -47,6 +57,8 @@ INSTALLED_APPS = [
     'user_app',
     'authentication_app'
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,10 +69,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    
+    #'social_django.middleware.SocialAuthExceptionMiddleware',
 
 ]
 
 ROOT_URLCONF = 'Bhoklagyo.urls'
+
 
 TEMPLATES = [
     {
@@ -73,6 +88,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                
+               
             ],
         },
     },
@@ -152,6 +170,39 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "bhoklagyo2@gmail.com"
 EMAIL_HOST_PASSWORD = "tkrubtmqatforwhd"
 
-SESSION_EXPIRE_SECONDS = 300
+SESSION_EXPIRE_SECONDS = 1800
 SESSION_TIMEOUT_REDIRECT = "/user_app/signup"
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+SOCIALACCOUNT_PROVIDERS = \
+{'facebook':
+{'METHOD': 'oauth2',
+'SCOPE': ['email','public_profile',],
+'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+'FIELDS': [
+'id',
+'email',
+'name',
+'first_name',
+'last_name',
+'verified',
+'locale',
+'timezone',
+'link',
+'gender',
+'updated_time'],
+'EXCHANGE_TOKEN': True,
+'LOCALE_FUNC': lambda request: 'kr_KR',
+'VERIFIED_EMAIL': False,
+'VERSION': 'v2.4'}}

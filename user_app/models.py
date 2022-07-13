@@ -19,14 +19,14 @@ class User(AbstractUser):
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, default=CUSTOMER)
     USERNAME_FIELD: str ='email'
     REQUIRED_FIELDS: list =['password','phone']
-
-    
-
 class Customer(User):
     is_superuser = False 
     is_staff = False
     is_active = True 
 
+    USERNAME_FIELD: str ='phone' 
+    class Meta:
+        db_table = 'Customer'
 
     USERNAME_FIELD: str ='phone'
 
