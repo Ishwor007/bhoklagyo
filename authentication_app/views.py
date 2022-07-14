@@ -1,14 +1,13 @@
-import http.client
 from pickle import FALSE
 import random
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render,redirect
-from food_app.views import landing_page
-from user_app.models import Customer, User
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
+
 from user_app import views as user_view
-from django.core.exceptions import ObjectDoesNotExist
+from user_app.models import Customer, User
 
 
 def send_otp_via_email(email):
@@ -20,67 +19,38 @@ def send_otp_via_email(email):
     return otp
 
 def validateOtp(request):
+    valid_phone=False
     try:
         user_list=request.session["user_list"]
-        first_name = user_list[0]
-        last_name = user_list[1]
-        email = user_list[2]
-        phone = user_list[3]
-        password = user_list[4]
-        generatedotp = user_list[5]
+        first_name, last_name, email, phone, password, generatedotp = user_list[:6]
+        # last_name = user_list[1]
+        # email = user_list[2]
+        # phone = user_list[3]
+        # password = user_list[4]
+        # generatedotp = user_list[5]
     except KeyError:
         return redirect('/')
     if request.method != "POST":  
-        print(user_list)
         return render(request, 'authentication_app/otp.html')
     else:
         userotp = request.POST['otp']
         if generatedotp == userotp :
-            user_check = User.objects.all()
-            if not user_check:
-                user = Customer.objects.create(first_name=first_name,
-                                        last_name=last_name,
-                                        email=email,
-                                        phone=phone,
-                                        password=password)
-                return redirect(user_view.login_page)
-            else:  
-                for user in user_check:
-                    check_user_phone = Customer.phone
-                    if check_user_phone == phone:
-                        valid_phone = True
-                    else:
-                        valid_phone = False
-                if valid_phone:
-                    return HttpResponse("user already created")
-                else:
-                    user = Customer.objects.create(first_name=first_name,
-                                        last_name=last_name,
-                                        email=email,
-                                        phone=phone,
-                                        password=password)
-                    return redirect(user_view.login_page)
+            user = Customer.objects.get_or_create(
+                                    first_name=first_name,
+                                    last_name=last_name,
+                                    email=email,
+                                    phone=phone,
+                                    password=password)
+            
+            # authenticate_user = authenticate(request, email = email, password =  password)
+            # if authenticate_user:
+            #     login(request, user)
+            #     return redirect('/')
+            return redirect(user_view.login_page)
+        
         else:
             return HttpResponse("your otp is wrong")
-        if generatedotp == userotp:
-            user_check = Customer.objects.all()
-            for user in user_check:
-                check_user_phone = user.phone
-                if check_user_phone == phone:
-                    valid_phone = True
-                else:
-                    valid_phone = False
-            if valid_phone:
-                print("user exist")
-                return HttpResponse("user already created")
-            else:
-                user = Customer.objects.create(first_name=first_name,
-                                       last_name=last_name,
-                                       email=email,
-                                       phone=phone,
-                                       password=password)
 
-                return redirect(user_view.login_page)
         
 def resend_otp(request):
     user_list = request.session['user_list']
