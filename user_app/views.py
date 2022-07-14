@@ -24,7 +24,7 @@ def register_customer(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         phone = request.POST['phone']
-        password = make_password(request.POST['password'])
+        password =(request.POST['password'])
         try:
             user = Customer.objects.get(phone=phone)
         except ObjectDoesNotExist:
@@ -48,8 +48,6 @@ def login_user(request):
     if request.method=='POST':
         phone = request.POST['phone']
         pass_key = request.POST['password']
-
-
         user = authenticate(phone=phone, password=pass_key)
         if user:
             login(request, user)
