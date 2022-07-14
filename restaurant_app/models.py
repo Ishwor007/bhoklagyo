@@ -1,6 +1,8 @@
 from django.db import models
 from user_app.models import User
 
+from user_app.managers import UserManager
+
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=200)
     location = models.CharField(max_length=200, null=True)
@@ -18,11 +20,12 @@ class Restaurant(models.Model):
 class RestaurantAdmin(User):
     restaurant_name = models.OneToOneField(Restaurant,on_delete=models.CASCADE,related_name='restaurant')
     
+    # is_superuser = models.BooleanField(default=False)
+    # is_staff = models.BooleanField(default=True) 
+    # is_active = models.BooleanField(default=True)
     role = User.RESTAURANT_ADMIN
     
-    is_superuser = False
-    is_staff = True 
-    is_active = True
+    objects =UserManager()
 
     USERNAME_FIELD: str = 'email'
 

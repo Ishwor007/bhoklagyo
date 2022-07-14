@@ -194,7 +194,7 @@ SOCIALACCOUNT_PROVIDERS = \
 'FIELDS': [
 'id',
 'email',
-'name',
+# 'name',
 'first_name',
 'last_name',
 'verified',
