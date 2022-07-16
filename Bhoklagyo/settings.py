@@ -153,6 +153,7 @@ STATICFILES_DIRS = [STATIC_DIR]
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 AUTH_USER_MODEL = 'user_app.User'
+
 LOGOUT_REDIRECT_URL = 'user_app/login'
 LOGIN_REDIRECT_URL = '/'
 
