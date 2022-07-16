@@ -19,15 +19,10 @@ def send_otp_via_email(email):
     return otp
 
 def validateOtp(request):
-    valid_phone=False
     try:
         user_list=request.session["user_list"]
         first_name, last_name, email, phone, password, generatedotp = user_list[:6]
-        # last_name = user_list[1]
-        # email = user_list[2]
-        # phone = user_list[3]
-        # password = user_list[4]
-        # generatedotp = user_list[5]
+
     except KeyError:
         return redirect('/')
     if request.method != "POST":  
