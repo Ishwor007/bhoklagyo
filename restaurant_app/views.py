@@ -8,6 +8,8 @@ from django.conf import settings
 
 import random
 from restaurant_app.models import RestaurantAdmin, Restaurant
+from user_app.models import User
+
 
 
 def register_admin(data:dict, restaurant:Restaurant):
@@ -66,7 +68,7 @@ def login_admin(request):
         print(f"Email: {email} Password: {password} ")
         admin = authenticate(request, email=email, password=password)
         
-        if admin.is_authenticated:
+        if admin.is_authenticated and admin.role == User.RESTAURANT_ADMIN:
             login(request, admin)
             return redirect('/')
             # return HttpResponse(f'Success path <strong>{admin}</strong>  authenticated : <strong>{admin.is_authenticated}</strong>')
