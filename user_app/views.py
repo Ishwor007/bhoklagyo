@@ -50,11 +50,11 @@ def login_user(request):
         pass_key = request.POST['password']
         user = authenticate(phone=phone, password=pass_key)
         
-        if user:
+        if user and user.role == User.CUSTOMER:
             login(request, user)
-            redirect('landing_page')
+            return redirect('landing_page')
         else:
-            return HttpResponse(f"This user does not exist. Check phone and password. {phone} {pass_key} {user}")
+            return HttpResponse(f"Oops! This user does not exist")
 
 
 def logout_user(request):
