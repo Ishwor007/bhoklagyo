@@ -40,13 +40,17 @@ def delete_from_cart(request, food_id):
     return redirect(user_views.login_page)
 
 def order_all(request):
-    if request.user.is_authenticated:
-        cart = Cart.objects.filter(user=request.user.id)
-        user = Customer.objects.get(user_ptr_id=request.user.id)
+    if request.user.is_authenticated:        
+        customer = Customer.objects.get(user_ptr_id=request.user.id)
+        cart = Cart.objects.filter(user_id=customer.id)
+        user_orders = Order.objects.filter(user_id=customer.id)
+        
+        order_ids = [user_orders.item_id for user_orders in user_orders]
+        
         for item in cart:
-            user_orders = Order.objects.filter(user=user, item=item.item)
-            if item not in user_orders:
-                order = Order.objects.create(user=user, item=item.item, quantity=1)
+            if not item.item_id in order_ids:
+                print(f"Item: {item.item_id}")
+                Order.objects.create(user=customer, item_id=item.item_id, quantity=1)
 
         return redirect('orders')
     return redirect(user_views.login_page)
@@ -56,7 +60,6 @@ def order_item(request, food_id):
         food = Food.objects.get(id=food_id)
         user = Customer.objects.get(user_ptr_id=request.user.id)
         exists = Order.objects.filter(user=user, item=food)
-        # orders.quantity = 1
         if exists:
             return redirect('orders')
         else:
