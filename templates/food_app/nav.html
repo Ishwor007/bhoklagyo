@@ -9,9 +9,15 @@
                 <li class="nav-item">
                     <a href="{% url 'register-restaurant-form' %}" class="nav-link">Add Restaurent </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{% url 'restro_admin' %}" class="nav-link">Dashboard</a>
+                </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a href="{% url 'cart' %}" class="nav-link">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'restro_admin' %}" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a href="{% url 'logout' %}" id="button" class="nav-link">Logout ({{user.role}})</a> <!-- login id is here -->
