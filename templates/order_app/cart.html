@@ -1,0 +1,79 @@
+{% extends 'food_app/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!-- cart start -->
+<div class="container-cart">
+    <div class="row-cart">
+        <div class="col-cart-main">
+            <h2 class="resto-name">My Cart</h2>
+            <hr>
+            <div class="row-order-item">
+                <!-- one order item start -->
+                {% if items %}
+                    {% for it in items %}
+                    <div class="col-order-item">
+                        <img src="http://localhost:8000{{it.item.image.url}}" class="img-item" alt="item-image">
+                        <div class="order-item-details">
+                            <div class="item-details">{{it.item.restaurant.restaurant_name}}</div>
+                            <div class="stars item-details">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="item-details">{{it.item.name}}</div>
+                            <div class="item-price item-details">Rs. {{it.item.unit_price}}</div>
+                        </div>
+                        <div class="order-controls"style="margin-top:40px;">
+                            <a href=" {% url 'order_item' it.id %}">
+                                <input class="btn btn-primary" type="submit" value="Order Now">
+                            </a>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+
+                        <!-- checkout button -->
+                        <div>
+                            <a href=" {% url 'order_all' %} ">
+                                <input class="btn btn-primary order-btn" type="submit" value="Order all"></input>
+                            </a>
+                        </div>
+                {% else %}
+                    <div>
+                        <h3>No items in cart</h3>
+                    </div>
+                {% endif %}
+                <!-- one order item end -->
+            </div>
+
+        </div>
+        <div class="col-cart-mid">
+
+        </div>
+    </div>
+</div>
+<!-- cart end -->
+<script>
+    document.getElementById("subtract").addEventListener("click", function(){
+        var quantity = document.getElementById("quantity").value;
+        quantity = parseInt(quantity);
+        console.log(quantity);
+        if(quantity > 1){
+            quantity--;
+            document.getElementById("quantity").value = quantity;
+        }
+    });
+    document.getElementById("add").addEventListener("click", function(){
+        var quantity = document.getElementById("quantity").value;
+        quantity = parseInt(quantity);
+        quantity++;
+        console.log(quantity);
+        document.getElementById("quantity").value = quantity;
+    });
+
+</script>    
+
+{% endblock %}

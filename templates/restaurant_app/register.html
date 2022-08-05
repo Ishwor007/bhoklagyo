@@ -4,22 +4,31 @@
 {% block title %} Register | Bhoklagyo {% endblock %}
 
 {% block content %}
-<form method="POST">
+
     {% csrf_token %}
-    <label for="name">Name</label>
-    <input type="text" name="name" placeholder="Restaurant Name" required/>
+    <div class="container">
+        <div class="row-restaurant">
+            <div class="col-restaurant">
+                <h1>Restaurant Register</h1>
+                <form action="{% url 'register-restaurant-form' %}" method="POST">  
+                    {% csrf_token %}                  
+                    <label class="details" for="restaurant_name">Restaurant Name:</label>
+                    <input type="text" class="input-details" name="restaurant_name">
+                    <label class="details" for="address">Restaurant Location:</label>
+                    <input type="text" class="input-details" name="address">
+                    <label class="details" for="phone">Contact Number:</label>
+                    <input type="tel" pattern="9[0-9]{9}" class="input-details" name="phone">
+                    <label class="details" for="pan">PAN Number:</label>
+                    <input type="text" class="input-details" name="pan">
+                    <input type="submit" class="register-button" value="Register">
+                    {% comment %} <button type="submit" name="submit-btn">Submit Form</button> {% endcomment %}
 
-    <label for="location">Location</label>
-    <input type="text" name="location" placeholder="Location" required/>
-    
-    <label for="phone">Phone</label>
-    <input type="tel" name="phone" placeholder="9xxxxxxxxx" pattern="9[0-9]{9}" required/>
+                </form>
 
-    <label for="email">Email</label>
-    <input type="email" name="email"required/>
+            </div>
+        </div>
+    </div>
 
-    <button type="submit" name="submit-btn">Submit Form</button>
 
-</form>
 
 {% endblock %}

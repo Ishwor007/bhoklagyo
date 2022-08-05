@@ -41,7 +41,7 @@ class UserManager(BaseUserManager):
         )
         user.is_staff = True
         user.role = user.RESTAURANT_ADMIN
-  
+        
         user.set_password(password)
         
         user.save(using=self._db)

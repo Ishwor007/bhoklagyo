@@ -1,0 +1,87 @@
+.row-restaurant{
+    color: green;
+    border: 1px solid #fff;
+    height: 500px;
+    width: 700px;
+    border-radius: 20px;
+    background: #fff;
+}
+.col-restaurant{
+    color: #000;
+    display: block;
+    margin-top: 50px;
+    margin-left: 150px;
+    font-size: bolder;
+    font-weight: 500;
+}
+.col-restaurant h1{
+    position: relative;
+    margin-bottom: 10px;
+    letter-spacing: 1.5px;
+}
+.col-restaurant h1:before{
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: 0;
+    height: 10%;
+    width: 15%;
+    background: #554b4b;
+    /* z-index: 1; */
+    max-block-size: screen;
+    border-radius: 10px;
+}
+.details{
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+.register-button{
+    display: block;
+}
+.input-details{
+    height: 30px;
+    width: 400px;
+    border-radius: 7px;
+    padding: 0 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+
+}
+.register-button{
+    width: 100px;
+    height: 30px;
+    padding: 2px 10px;
+    cursor: pointer;
+    border-radius: 7px;
+    background: green;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+@media(max-width: 768px){
+    .row-restaurant{
+        margin-top: -90px;
+        height: 479px;
+        width: 325px;
+    }
+    .col-restaurant{
+        margin-top: 21px;
+        margin-left: 25px;
+    }
+    .input-details {
+        width: 275px;
+    }
+    .col-restaurant h1{
+        margin-bottom: 12px;
+    }
+    .col-restaurant h1:before{
+        position: absolute;
+        top: 80px;
+        height: 7px;
+        width: 19%;
+    }
+    
+}

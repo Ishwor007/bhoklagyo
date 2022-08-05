@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    # allauth apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
 
+    # project apps
     'Bhoklagyo',
     'food_app',
     'order_app',
@@ -66,7 +68,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
 
-    #'social_django.middleware.SocialAuthExceptionMiddleware',
+    # 'social_django.middleware.SocialAuthExceptionMiddleware',
 
 ]
 
@@ -149,6 +151,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
@@ -185,22 +190,25 @@ LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = \
     {'facebook':
-     {'METHOD': 'oauth2',
-      'SCOPE': ['email', 'public_profile', ],
-      'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-      'FIELDS': [
-          'id',
-          'email',
-          # 'name',
-          'first_name',
-          'last_name',
-          'verified',
-          'locale',
-          'timezone',
-          'link',
-          'gender',
-          'updated_time'],
-         'EXCHANGE_TOKEN': True,
-         'LOCALE_FUNC': lambda request: 'kr_KR',
-         'VERIFIED_EMAIL': False,
-         'VERSION': 'v2.4'}}
+        {'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', ],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            # 'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4'
+        }
+    }

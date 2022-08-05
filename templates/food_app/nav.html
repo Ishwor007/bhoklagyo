@@ -1,0 +1,35 @@
+    <!-- header start -->
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'landing_page' %}" class="nav-branding">Bhoklagyo</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="{% url 'home_page' %}" class="nav-link">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'register-restaurant-form' %}" class="nav-link">Add Restaurent </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'cart' %}" class="nav-link">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" id="button" class="nav-link">Logout ({{user.role}})</a> <!-- login id is here -->
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" id="button" class="nav-link">Login</a> <!-- login id is here -->
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'signup' %}" id="button" class="nav-link">Signup</a> <!-- login id is here -->
+                </li>
+                {% endif %}
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    <!-- header end -->

@@ -1,0 +1,22 @@
+.row-admin{
+    background: green;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.col-menu{
+    width: 20%;
+    height: 100%;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.verticle-line{
+    height: 100%;
+    border-left: 3px solid #000000;
+}
+.col-content{
+    width: 100%;
+    height: 100%;
+    margin-left: 15px;
+    margin-top: 15px;
+}
