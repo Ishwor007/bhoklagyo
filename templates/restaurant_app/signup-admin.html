@@ -1,22 +1,37 @@
-{% extends 'food_app/base.html' %}
-
-{% load static %}
-{% block title %} Register | Bhoklagyo {% endblock %}
+{% extends 'food_app/base.html' %} 
+{% load static %} 
+{% block title %} Register| Bhoklagyo {% endblock %} 
 
 {% block content %}
 <form method="POST">
-    {% csrf_token %}
-    <label for="name">Restaurant Name</label>
-    <input type="text" name="name" placeholder="Restaurant Name" required/>
+    <!-- content start -->
+    <div class="container">
+        <div class="row-restaurant">
+            <div class="col-restaurant">
+                <h1>Restaurant Register</h1>
+                <form action="">
+                    {% csrf_token %}
+                    <label class="details" for="">Restaurant Name:</label>
+                    <input type="text" class="input-details" name="name"/>
 
-    <label for="location">Location</label>
-    <input type="text" name="location"required/>
-    
-    <label for="phone">Phone</label>
-    <input type="tel" name="phone" placeholder="9xxxxxxxxx" pattern = '9[0-9]{9}' required/>
+                    <label class="details" for="">Restaurant Location:</label>
+                    <input type="text" class="input-details" name="location"/>
 
-    <button type="submit" name="submit-btn">Submit Form</button>
+                    <label class="details" for="">Contact Number:</label>
+                    <input type="tel" pattern="9[0-9]{9}" class="input-details" name="phone"/>
 
-</form>
+                    <label class="details" for="">PAN Number:</label>
+                    <input type="text" class="input-details" name="pan"/>
+
+                    <input type="submit" class="register-button" value="Register" />
+                    <div>Already have an account? <a href="{% url 'login-admin' %}">Login</a></div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- content end -->
+
 
 {% endblock %}

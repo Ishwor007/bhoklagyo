@@ -1,0 +1,61 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- content start -->
+
+    <div class="home-banner">
+        <div class="row-banner">
+            <!-- search box start -->
+            <form class="main-search" action="#">
+                <input type="search" class="searchBox" placeholder="Search...">
+                <button type="submit" class="searchIcon"> <i class="fa fa-search " aria-hidden="true"></i> </button>
+            </form>
+            <!-- search box end -->
+        </div>
+    </div>
+
+    <div class="home">
+        <div class="row-home">
+            <div class="col-home">
+                <div class="col-home-wrapper">
+                    <label class="cards-heading">Searched Items</label>
+                    <hr style="margin-top: 5px;">
+                    {% for food in foods  %}
+                    <!-- card start -->
+                    <div class="all__cards">
+                        <div class="card">
+                            <a href="#"><img src=" http://localhost:8000{{food.image.url}} " class="img-card" alt=""></a>
+                            <div style="margin-left: 5px;">
+                                <i class="fa-solid fa-star" style="color: #ffd700"></i>
+                                <i class="fa-solid fa-star" style="color: #ffd700"></i>
+                                <i class="fa-solid fa-star" style="color: #ffd700"></i>
+                                <i class="fa-solid fa-star" style="color: #ffd700"></i>
+                                <i class="fa-solid fa-star"></i>
+
+                            </div>
+                            <div class="card-details">
+                                <strong> <a href="#">{{food.name}}</a></strong> <br><!-- Product Name -->
+                                <label>{{food.restaurant.restaurant_name}}<span>{{food.restaurant.location}}</span></label> <!-- Restaurant Name -->
+
+                                <div class="price">Rs.<span>{{food.unit_price}}</span></div> <!-- Price -->
+
+                                <div>
+                                    <a href=" {% url 'order_item' food.id %} "><input class="btn btn-primary" type="submit" value="Order Now"></input></a>
+                                    <a href=" {% url 'add_to_cart' food.id %} "><input class="btn btn-primary" type="submit" value="Add to cart"></input></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- cards end -->
+                </div>
+            </div>
+            <div class="col-between"></div>
+            <!-- Category right side -->
+        </div>
+    </div>
+
+
+    <!-- content end -->
+    {% endblock content %}

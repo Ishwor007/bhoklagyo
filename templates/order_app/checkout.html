@@ -1,0 +1,91 @@
+{% load static %}
+<link rel="stylesheet" href="{% static './css/checkout.css' %}">
+
+<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+
+{% block  checkout %}
+    <h2>Checkout</h2>
+    <div class="row">
+        <div class="col-50">
+            <div class="container">
+                <form action="billing_location" id="checkout-form" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Billing Address</h3>
+                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                            <input type="text" id="fname" name="fullname" placeholder="John M. Doe">
+
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input type="text" id="email" name="email" placeholder="john@example.com">
+                            
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+
+                            <button type="submit" class="btn btn-primary" >Submit Address</button>
+                        </div>
+                        
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+
+        <div class="col-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-50">
+                        <h3>Payment</h3>
+                        
+                            <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
+                            <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+                            <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+                            <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+                            <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+                            <hr>
+                            <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+                            <button class="btn" id="payment-button">Checkout with Khalti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+<script>
+    var config = {
+        "publicKey": "test_public_key_ee8f489a141a44c0b7922037df48d668",
+        "productIdentity": "1234567890",
+        "productName": "Dragon",
+        "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+        "paymentPreference": [
+            "KHALTI",
+            "EBANKING",
+            "MOBILE_BANKING",
+            "CONNECT_IPS",
+            "SCT",
+            ],
+        "eventHandler": {
+            onSuccess (payload) {
+                // hit merchant api for initiating verfication
+                console.log(payload);
+            },
+            onError (error) {
+                console.log(error);
+            },
+            onClose () {
+                console.log('widget is closing');
+            }
+        }
+    };
+    
+    var checkout = new KhaltiCheckout(config);
+    var btn = document.getElementById("payment-button");
+    btn.onclick = function () {
+        // minimum transaction amount must be 10, i.e 1000 in paisa.
+        checkout.show({amount: 1000});
+    }
+</script>
+    
+    {% endblock  %}

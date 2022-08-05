@@ -7,7 +7,7 @@
     flex-wrap: wrap;
     /* justify-content: center; */
 }
-ul{
+.footer-col ul{
     list-style-type: none;
 }
 

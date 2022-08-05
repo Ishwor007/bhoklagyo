@@ -3,12 +3,12 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ObjectDoesNotExist
 
 
 from authentication_app import views as auth_views
 from .models import Customer,User
-from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -24,7 +24,7 @@ def register_customer(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         phone = request.POST['phone']
-        password =(request.POST['password'])
+        password =make_password(request.POST['password'])
         try:
             user = Customer.objects.get(phone=phone)
         except ObjectDoesNotExist:

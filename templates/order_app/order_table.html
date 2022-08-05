@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VokLagyo</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/popup.css">
+
+</head>
+
+<body>
+    <!-- header start -->
+    <header>
+        <nav class="navbar">
+            <a href="./index.html" class="nav-branding">Voklagyo</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="./restro_signup.html" class="nav-link">Add Restaurent </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="button" class="nav-link">Login</a> <!-- login id is here -->
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    <!-- header end -->
+
+    <!-- content start -->
+    <div class="container">
+        <div class="row_order">
+            <div class="col_column">
+                <h1>Order Table</h1>
+                <form action="">
+                    <!-- form content -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- content end -->
+
+    <!-- popip login start -->
+    <div class="popup">
+        <div class="popup-content">
+            <form action="">
+            <img src="./images/close.png" alt="close" class="close">
+            <h2 class="title-login">Login</h2>
+            <br>
+            <label class="reg-details">Number</label>
+            <input class="inputBox number" type="number" placeholder="Number">
+            <label class="reg-details">Password</label>
+            <input class="inputBox" type="password" placeholder="Password">
+            <!-- <a href="#" class="button">Login</a> -->
+            <br>
+            <inpit type="submit" class="login-button">Login</inpit>
+            <a href="#" class="forgot-password">Forgot password?</a>
+            <p class="signup">Don't have account? <a href="#" class="signup-link">Signup</a></p>
+            
+            </form>
+            
+        </div>
+    </div>
+    <script>
+        document.getElementById("button").addEventListener("click", function(){
+            document.querySelector(".popup").style.display="flex";
+            console.log("clicked.");
+        });
+
+        document.querySelector(".close").addEventListener("click", function(){
+            document.querySelector(".popup").style.display="none";
+        });
+    </script>
+    <!-- popup login end -->
+
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="container-80">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our services</a></li>
+                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#">Affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">shipping</a></li>
+                        <li><a href="#">returns</a></li>
+                        <li><a href="#">order status</a></li>
+                        <li><a href="#">payment options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Online restaurent</h4>
+                    <ul>
+                        <li><a href="#">nanglo</a></li>
+                        <li><a href="#">foodlang</a></li>
+                        <li><a href="#">red roof</a></li>
+                        <li><a href="#">pizza virus</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <ul>
+                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="color:#fff; margin-bottom:-10px;">&copy; BhokLagyo 2022</div>
+        </div>
+    </footer>
+    <!-- footer end -->
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

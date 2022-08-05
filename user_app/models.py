@@ -35,9 +35,9 @@ class Customer(User):
     first_name:str  = models.CharField(max_length=255)
     last_name:str   = models.CharField(max_length=255)
     
-
     USERNAME_FIELD: str ='phone' 
-    
+    REQUIRED_FIELDS: list   =['password']
+
     class Meta:
         db_table        = 'Customer'
         verbose_name    = 'Customer'
@@ -45,4 +45,19 @@ class Customer(User):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+class Admin(User):
+    restaurant_name:str  = models.CharField(max_length=255)
+
+    USERNAME_FIELD: str ='phone' 
+    REQUIRED_FIELDS: list   =['password']
+
+    class Meta:
+        db_table        = 'Admin'
+        verbose_name    = 'Admin'
+        
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 

@@ -11,100 +11,28 @@
     <link rel="stylesheet" href="{% static './css/footer.css' %}">
     <link rel="stylesheet" href="{% static './css/login.css' %}">
     <link rel="stylesheet" href="{% static './css/otp.css' %}">
+    <link rel="stylesheet" href="{% static './css/cart.css' %}">
+    <link rel="stylesheet" href="{% static './css/home.css' %}">
+    <link rel="stylesheet" href="{% static './css/order_table.css' %}">
+    <link rel="stylesheet" href="{% static './css/popup.css' %}">
+    <link rel="stylesheet" href="{% static './css/restro_admin.css' %}">
+    <link rel="stylesheet" href="{% static './css/restro_signup.css' %}">
+    <link rel="stylesheet" href="{% static './css/validate.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+
 </head>
 
 <body>
-    <!-- header start -->
-    <header class="header">
-        <nav class="navbar">
-            <a href="/" class="nav-branding">Bhoklagyo</a>
-            <ul class="nav-menu">
+    {% include './nav.html' %}
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Services</a>
-                </li>
-                {% if not user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="/user_app/login" class="nav-link">Log in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'register-restaurant-form' %}" class="nav-link">Add Restaurent </a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        {% comment %} <a href="{% url '' %}" class="nav-link">Menu</a> {% endcomment %}
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="/user_app/logout" class="nav-link">Log out</a>
-                    </li>
-                {% endif %}
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
-    <!-- header end -->
     <main class="main">
-    {% if messages %}
-        <ul class="messagelist">{% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-    {% endfor %}</ul>
-    {% endif %}
-
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
 
-<!--    footer start-->
-    <footer class="footer">
-        <div class="container-80">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our services</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">Affiliate program</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get Help</h4>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">shipping</a></li>
-                        <li><a href="#">returns</a></li>
-                        <li><a href="#">order status</a></li>
-                        <li><a href="#">payment options</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Online restaurent</h4>
-                    <ul>
-                        <li><a href="#">nanglo</a></li>
-                        <li><a href="#">foodlang</a></li>
-                        <li><a href="#">red roof</a></li>
-                        <li><a href="#">pizza virus</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow us</h4>
-                    <div class="social-links">
-                        <ul>
-                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="color:#fff; margin-bottom:-10px;">&copy; BhokLagyo 2022</div>
-        </div>
-    </footer>
-<!--    footer end-->
+    {% include './footer.html' %}
     <script src="{% static './js/script.js' %}"></script>
 </body>
 

@@ -36,11 +36,6 @@ def validateOtp(request):
                                     email=email,
                                     phone=phone,
                                     password=password)
-            
-            # authenticate_user = authenticate(request, email = email, password =  password)
-            # if authenticate_user:
-            #     login(request, user)
-            #     return redirect('/')
             return redirect(user_view.login_page)
         
         else:

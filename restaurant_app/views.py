@@ -8,7 +8,7 @@ from django.conf import settings
 
 import random
 from restaurant_app.models import RestaurantAdmin, Restaurant
-from user_app.models import User
+from user_app.models import User, Customer, Admin
 
 
 
@@ -37,15 +37,18 @@ def register_admin(data:dict, restaurant:Restaurant):
     
 def register_restaurant_form(request):
     if request.method == 'POST':
-        name = request.POST.get('name','')
-        location = request.POST.get('location','')
+        name = request.POST.get('restaurant_name','')
+        location = request.POST.get('address','')
         phone = request.POST.get('phone','')
-        email = request.POST.get('email')
+        pan = request.POST.get('pan','')
+        # email = request.POST.get('email')
         data ={
             'name':name,
             'location':location,
-            'phone':phone
+            'phone':phone,
+            'PAN':pan
         }
+        
         restaurant = register_restaurant(data)
         register_admin(data, restaurant)
         return redirect('login-restaurant')
@@ -66,12 +69,11 @@ def login_admin(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         print(f"Email: {email} Password: {password} ")
-        admin = authenticate(request, email=email, password=password)
+        admin = authenticate(request, email=email, password=password, role=User.RESTAURANT_ADMIN)
         
-        if admin.is_authenticated and admin.role == User.RESTAURANT_ADMIN:
+        if admin:
             login(request, admin)
-            return redirect('/')
-            # return HttpResponse(f'Success path <strong>{admin}</strong>  authenticated : <strong>{admin.is_authenticated}</strong>')
+            return HttpResponse(f"Success path <strong>{admin}</strong>  authenticated : <strong>{admin.is_authenticated}</strong>")
         else:
             message = messages.error(request, "Unable to login. Please input valid credentials.")
             return render(request, 'restaurant_app/login-admin.html',{'message':message})
@@ -84,11 +86,10 @@ def logout_admin(request):
     return redirect('login')
 
 def add_food(request):
-    if request.user.is_authenticated and request.user.is_staff:
+    user = Admin.objects.get(user_ptr_id=request.user.id)
+
+    if user:
         return HttpResponse('This user can add food in menu')
     
     else:
         return HttpResponse('You are not authorised to view this page.')
-    
-            
-                
