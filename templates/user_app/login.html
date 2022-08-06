@@ -12,17 +12,18 @@
         <div class="col-restaurant">
           <form action="/user_app/authenticate/" method="post">
             {% csrf_token %}
-          <h2 class="title-login">Login</h2>
+          <h1 class="title-login">Login</h1>
           <br>
           <label class="reg-details">Phone</label>
-          <input class="inputBox number" type="tel" pattern="9[0-9]{9}" name="phone">
+          <input class="inputBox number" type="tel" pattern="9[0-9]{9}" placeholder="98XXXXXXXX" name="phone">
           <label class="reg-details">Password</label>
           <input class="inputBox" type="password" name="password">
           <br>
           <button type="submit" class="login-button">Login</button>
+
           <a href="#" class="forgot-password">Forgot password?</a>
           <p class="signup">Don't have account? <a href="{% url 'signup' %}" class="signup-link">Signup</a></p>
-          <p>Not customer? Login as <a href="{% url 'login-restaurant' %}" style="color:orangered;">Restaurant</a></p>
+          <p class="other">Not customer? Login as <a href="{% url 'login-restaurant' %}" style="color:orangered;">Restaurant</a></p>
           
           </form>
         </div>  

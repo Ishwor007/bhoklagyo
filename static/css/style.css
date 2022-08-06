@@ -24,7 +24,7 @@ a{
 }
 
 .navbar{
-    min-height: 10vh;
+    min-height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -76,7 +76,7 @@ a{
         transform: translateY(-8px) rotate(-45deg);
     }
     .nav-menu{
-        position: fixed;
+        position: absolute  ;
         left: -100%;
         top: 70px;
         gap: 0;
@@ -85,6 +85,7 @@ a{
         width: 100%;
         text-align: center;
         transition: 0.3s ease;
+        z-index: 99;
     }
     .nav-item{
         margin: 16px 0;
@@ -94,6 +95,8 @@ a{
     }
     .nav-menu.active{
         left: 0;
+        position: absolute;
+        margin-top: -15px
     }
 
     .nav-branding {
@@ -107,13 +110,15 @@ a{
 
 /* content start */
 .container{
-    background: darkgray;
+    /* background: darkgray; */
     width:100vw;
-    height: 650px;
+    min-height: 670px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../images/background.jpg'); */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
 }
 .container-bg{
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../images/background.jpg');

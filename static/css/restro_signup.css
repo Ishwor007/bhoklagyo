@@ -1,16 +1,17 @@
 .row-restaurant{
     color: green;
     border: 1px solid #fff;
-    height: 500px;
+    height: 560px;
     width: 700px;
     border-radius: 20px;
     background: #fff;
+    box-shadow: 3px 6px 8px 3px rgba(0,0,0,0.7);
 }
 .col-restaurant{
     color: #000;
     display: block;
     margin-top: 50px;
-    margin-left: 150px;
+    margin-left: 140px;
     font-size: bolder;
     font-weight: 500;
 }
@@ -18,6 +19,7 @@
     position: relative;
     margin-bottom: 10px;
     letter-spacing: 1.5px;
+    margin-top: -20px;
 }
 .col-restaurant h1:before{
     content: "";
@@ -25,7 +27,7 @@
     top: 35px;
     left: 0;
     height: 10%;
-    width: 15%;
+    width: 10%;
     background: #554b4b;
     /* z-index: 1; */
     max-block-size: screen;
@@ -37,9 +39,9 @@
     margin-bottom: 8px;
     letter-spacing: 1px;
 }
-.register-button{
-    display: block;
-}
+/* .register-button{
+    margin-bottom: 10px;
+} */
 .input-details{
     height: 30px;
     width: 400px;
@@ -50,16 +52,25 @@
 
 }
 .register-button{
-    width: 100px;
-    height: 30px;
-    padding: 2px 10px;
+    /* width: 100px;
+    height: 30px; */
+    display: block;
+    padding: 10px 15px;
     cursor: pointer;
     border-radius: 7px;
-    background: green;
-    color: #fff;
+    background: #fff;
+    color: #34495e;
     letter-spacing: 1px;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bolder;
+    transition: 0.4s;
+    margin-bottom: 10px;
 }
+.register-button:hover{
+    background: #ff4548;
+    color: #fff;
+}
+
 
 @media(max-width: 768px){
     .row-restaurant{
@@ -84,4 +95,9 @@
         width: 19%;
     }
     
+}
+
+/* modified color */
+.login-color a{
+    color: #ff4548;
 }
