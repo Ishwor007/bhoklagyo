@@ -25,4 +25,4 @@ class CustomRestaurantAdmin(UserAdmin):
     filter_horizontal = ()
 
 admin.site.register(Restaurant)
-admin.site.register(RestaurantAdmin, CustomRestaurantAdmin)
+admin.site.register(RestaurantAdmin)

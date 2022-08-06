@@ -17,17 +17,20 @@ class Restaurant(models.Model):
         return self.restaurant_name
 
     
-class RestaurantAdmin(User):
+class RestaurantAdmin(models.Model):
     restaurant_name = models.OneToOneField(Restaurant,on_delete=models.CASCADE,related_name='restaurant')
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin')
+    email = models.EmailField(max_length=200, unique=True)
     role    = User.RESTAURANT_ADMIN
     
     objects = UserManager()
 
     USERNAME_FIELD: str = 'email'
-
+    REQUIRED_FIELDS: list   =['password']
+    
     class Meta:
         verbose_name = 'Admin'
+        db_table     = 'Admin'
         permissions = (
             
         )

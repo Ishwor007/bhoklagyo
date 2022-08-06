@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
-import datetime
-
 from .managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -31,7 +29,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS: list   =['password','phone']
     
     
-class Customer(User):
+class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer')
     first_name:str  = models.CharField(max_length=255)
     last_name:str   = models.CharField(max_length=255)
     
@@ -46,18 +45,6 @@ class Customer(User):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-class Admin(User):
-    restaurant_name:str  = models.CharField(max_length=255)
 
-    USERNAME_FIELD: str ='phone' 
-    REQUIRED_FIELDS: list   =['password']
-
-    class Meta:
-        db_table        = 'Admin'
-        verbose_name    = 'Admin'
-        
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
 
 

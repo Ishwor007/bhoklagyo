@@ -7,8 +7,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 import random
-from restaurant_app.models import RestaurantAdmin, Restaurant
-from user_app.models import User, Customer, Admin
+from .models import RestaurantAdmin, Restaurant
+from user_app import models as user_models
 
 
 
@@ -16,16 +16,19 @@ def register_admin(data:dict, restaurant:Restaurant):
     email:str = data.get('name').replace(' ','').lower()+'@bhoklagyo.com'
     phone:str = data.get('phone')
     passkey_raw:str = str(data.get('name').replace(' ',''))+str(phone)
-    random_pass = ''.join(random.choices(passkey_raw,k=10))
-    admin:RestaurantAdmin = RestaurantAdmin.objects.create(
-        restaurant_name=restaurant,
+    random_pass:str = ''.join(random.choices(passkey_raw,k=10))
+    user:user_models.User = user_models.User.objects.create(
         email = email,
         phone = phone,
         password = make_password(random_pass),
+        is_staff = True,
+        role = user_models.User.RESTAURANT_ADMIN,
     )
-    admin.is_staff = True
-    admin.role = 1
-    admin.save()
+    admin:RestaurantAdmin = RestaurantAdmin(
+        user = user,
+        restaurant_name=restaurant,
+    )
+    
     send_mail(
         'Your password for Bhoklagyo',
         f'Your password for Bhoklagyo with email {email} is <b>{random_pass}.\
@@ -69,7 +72,7 @@ def login_admin(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         print(f"Email: {email} Password: {password} ")
-        admin = authenticate(request, email=email, password=password, role=User.RESTAURANT_ADMIN)
+        admin = authenticate(request, email=email, password=password, role=user_models.User.RESTAURANT_ADMIN)
         
         if admin:
             login(request, admin)
@@ -86,7 +89,7 @@ def logout_admin(request):
     return redirect('login')
 
 def add_food(request):
-    user = Admin.objects.get(user_ptr_id=request.user.id)
+    user = user_models.User.objects.get(id=request.user.id)
 
     if user:
         return HttpResponse('This user can add food in menu')

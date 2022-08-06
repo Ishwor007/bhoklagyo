@@ -10,19 +10,19 @@
                     <a href="{% url 'register-restaurant-form' %}" class="nav-link">Add Restaurent </a>
                 </li>
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a href="{% url 'cart' %}" class="nav-link">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'logout' %}" id="button" class="nav-link">Logout ({{user.role}})</a> <!-- login id is here -->
-                </li>
+                    <li class="nav-item">
+                        <a href="{% url 'cart' %}" class="nav-link">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" id="button" class="nav-link">Logout</a> <!-- login id is here -->
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a href="{% url 'login' %}" id="button" class="nav-link">Login</a> <!-- login id is here -->
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'signup' %}" id="button" class="nav-link">Signup</a> <!-- login id is here -->
-                </li>
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" id="button" class="nav-link">Login</a> <!-- login id is here -->
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'signup' %}" id="button" class="nav-link">Signup</a> <!-- login id is here -->
+                    </li>
                 {% endif %}
             </ul>
             <div class="hamburger">
