@@ -26,10 +26,15 @@
 
 <body>
     {% include './nav.html' %}
-
     <main class="main">
-        {% block content %}
-        {% endblock %}
+    {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+    {% endfor %}</ul>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
     </main>
 
     {% include './footer.html' %}

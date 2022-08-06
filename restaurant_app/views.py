@@ -96,3 +96,7 @@ def add_food(request):
     
     else:
         return HttpResponse('You are not authorised to view this page.')
+
+# modified by shantosh upload by ashant for restaurant admin panel
+def restro_admin(request):
+    return render(request, 'restaurant_app/admin-panel.html')

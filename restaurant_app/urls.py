@@ -8,5 +8,7 @@ urlpatterns = [
     path('register-restaurant-form', restaurant_views.register_restaurant_form, name='register-restaurant-form'),
     path('register-restaurant', restaurant_views.register_restaurant, name='register-restaurant'),
     path('login-restaurant', restaurant_views.login_admin, name = 'login-restaurant'),
+    path('restro_admin/', restaurant_views.restro_admin, name="restro_admin" ),
+
     # path('update_menu/<str:id>',restaurant_views.update_item, name = 'update-menu'),
 ]

@@ -81,7 +81,7 @@ nav ul li a:hover{
 .popup{
     background: rgba(0,0,0,0.6);
     width: 100%;
-    height:100%;
+    /* height:100%; */
     position: absolute;
     top:0;
     display: none;
@@ -101,7 +101,6 @@ nav ul li a:hover{
 }
 
 .login-button{
-    /* position: absolute; */
     background: #fff;
     padding: 10px 15px;
     color: #34495e;
@@ -109,13 +108,12 @@ nav ul li a:hover{
     text-transform: uppercase;
     font-size: 18px;
     border-radius: 5px;
-    box-shadow: 6px 6px 29px -4px rgba(0,0 ,0 ,0.75);
-    /* margin-top: 25px; */
-    /* background: #03a9f4; */
+    /* box-shadow: 6px 6px 29px -4px rgba(0,0 ,0 ,0.75); */
     text-decoration: none;
     transition: 0.4s;
     cursor: pointer;
     letter-spacing: 1px;
+    margin-left: 55px;
 }
 .login-button:hover{
     background: #ff4548;
@@ -125,6 +123,8 @@ nav ul li a:hover{
 .title-login{
     /* color: orange; */
     position: relative;
+    margin-left: 140px;
+    font-size: bolder;
 }
 .title-login::before{
     content: '';
@@ -161,7 +161,7 @@ nav ul li a:hover{
 .reg-details{
     font-size: 18px;
     font-weight: bolder;
-    margin: 2px auto;
+    margin-left: 55px;
 }
 .inputBox{
     height: 45px;
@@ -177,12 +177,15 @@ nav ul li a:hover{
     display: block;
     /* align-items: center; */
     /* justify-content: center; */
-    margin: 10px auto;
+    margin: 10px 50px 20px 55px;
+}
+.other-details{
+    margin-left: 55px;
 }
 
 .forgot-password{
     display: block;
-    margin:30px 0 10px 0;
+    margin:20px 0 5px 55px;
     text-decoration: none;
     cursor: pointer;
     font-size: 16px;
@@ -195,11 +198,16 @@ nav ul li a:hover{
 
 .signup{
     font-size: 16px;
+    margin-left: 55px;
+    margin-bottom: 5px;
 }
 .signup-link{
     text-decoration: none;
     cursor: pointer;
     color:#ff4548;
+}
+.other{
+    margin-left: 55px;
 }
 .number::-webkit-outer-spin-button,
 .number::-webkit-inner-spin-button{

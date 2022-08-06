@@ -1,0 +1,128 @@
+{% extends 'food_app/base.html' %}
+{% load static %}
+{% block title %} Restaurant Admin {% endblock %}
+
+{% block content %}
+
+<div class="container-admin">
+    
+    <div class="row-add_items">
+        <div class="col-add_items">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <h1>Add Items</h1>
+                <label for="" class="item_name">Name:</label>
+                <input type="text" class="inputItemBox" name="name">
+                <label for="" class="item_name">Price:</label>
+                <input type="number" class="inputItemBox" name="price">
+                <label for="" class="item_name">Image:</label>
+                <input type="file" id="img" name="img" accept="image/*">
+                <br>
+
+                <button class="btn-add" type="submit">
+                    <i class="fa-solid fa-circle-plus"></i> Add
+                </button>
+            <form>
+        </div>
+        <hr style="margin-bottom: 10px;">
+
+        <div class="row-menu">
+            <div class="col-menu">
+                <h1>All Items </h1>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <table>
+                        <thead class="thead">
+                            <tr class="table-row">
+                                <th class="table-heading">S.N.</th>
+                                <th class="table-heading">Name</th>
+                                <th class="table-heading">Price</th>
+                                <th class="table-heading">Controls</th>
+                            </tr>
+                    
+                        </thead>
+                        <tbody class="tbody">
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="table_data">1</th>
+                                <td class="table_data">Chicken Momo</td>
+                                <td class="table_data">Rs. 120</td>
+                                <td class="buttons">
+                                    <button class="tbtn" type="edit">Edit</button>
+                                    <button class="tbtn" type="delete">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div.
+</div>
+
+
+{% endblock%}

@@ -8,27 +8,20 @@
     <div class="container">
         <div class="row-restaurant">
             <div class="col-restaurant">
-                {% if messages %}
-                <ul class="messagelist">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-                    {% endfor %}
-                </ul>
-                    
-                {% endif %}
+
                 <form action="{% url 'login-restaurant' %}" method="post">
                     {% csrf_token %}
-                    <h2 class="title-login">Login</h2>
+                    <h1 class="title-login">Login</h1>
                     <br>
                     <label class="reg-details">Email</label>
                     <input class="inputBox" type="email" name="email">
                     <label class="reg-details">Password</label>
                     <input class="inputBox" type="password" name="password">
                     <br>
-                    <input type="submit" class="login-button">Login</input>
+                    <input type="submit" class="login-button">
                     <a href="#" class="forgot-password">Forgot password?</a>
                     <p class="signup">Don't have account? <a href="{% url 'signup' %}" class="signup-link">Signup</a></p>
-                    <p>Are you a customer? Login as <a href="{% url 'login-restaurant' %}" style="color:orangered;">Customer</a></p>
+                    <p class="other">Are you a customer? Login as <a href="{% url 'login-restaurant' %}" style="color:orangered;">Customer</a></p>
                 
                 </form>
             </div>  
