@@ -21,10 +21,10 @@ Create database
 ## Activate virtual environment
 Windows
 
-> source bhenv/Scripts/activate
+> bhenv/Scripts/activate
 
 Mac/Linux
->bhenv\Scripts\activate
+>source bhenv\Scripts\activate
 
 
 ## Install requirements (python>=3.8)
