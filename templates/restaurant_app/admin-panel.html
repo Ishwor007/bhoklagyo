@@ -10,13 +10,20 @@
         <div class="col-add_items">
             <form action="#" method="post">
                 {% csrf_token %}
+                
                 <h1>Add Items</h1>
+                <div class="input_group">
                 <label for="" class="item_name">Name:</label>
                 <input type="text" class="inputItemBox" name="name">
+                </div>
+                <div class="input_group">
                 <label for="" class="item_name">Price:</label>
                 <input type="number" class="inputItemBox" name="price">
-                <label for="" class="item_name">Image:</label>
+                </div>
+                <div class="input_group">
+                <label for="" class="item_name item_image">Image:</label>
                 <input type="file" id="img" name="img" accept="image/*">
+                </div>
                 <br>
 
                 <button class="btn-add" type="submit">

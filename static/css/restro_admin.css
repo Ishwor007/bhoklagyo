@@ -12,6 +12,10 @@
     margin-left: 60px;
     margin-bottom: 10px;
 }
+.row-add_items .col-add_items .input_group{
+    display: inline-block;
+    margin-bottom: 10px;
+}
 .row-add_items .col-add_items .inputItemBox{
     display: inline;
     margin-left: 2px;
@@ -20,6 +24,7 @@
     padding: 3px 10px;
     border-radius: 5px;
     font-size: 16px;
+    outline: none;
 }
 .row-add_items .col-add_items .btn-add{
     font-size: 22px;
@@ -32,6 +37,10 @@
     font-size: 18px;
     font-weight: bolder;
     margin-left: 60px;
+}
+.row-add_items .col-add_items .item_image{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .row-add_items .col-add_items #img{
     margin-left: 20px;
