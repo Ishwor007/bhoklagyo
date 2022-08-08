@@ -7,13 +7,13 @@ from user_app.models import User
 class EmailOrPhoneBackend(BaseBackend):
     def authenticate(self, request, phone=None, password=None):
         try:
-             user = User.objects.get(
-                 phone=phone,
-             )
-             pwd_valid = user.check_password(password)
-             if pwd_valid:            
-                 return user
-             return None
+            user = User.objects.get(
+                phone=phone,
+            )
+            pwd_valid = user.check_password(password)
+            if pwd_valid:            
+                return user
+            return None
         except User.DoesNotExist:
             return None
 

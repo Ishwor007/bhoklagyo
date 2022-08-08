@@ -41,7 +41,7 @@ def delete_from_cart(request, food_id):
 
 def order_all(request):
     if request.user.is_authenticated:        
-        customer = Customer.objects.get(user_ptr_id=request.user.id)
+        customer = Customer.objects.get(user_id=request.user.id)
         cart = Cart.objects.filter(user_id=customer.id)
         user_orders = Order.objects.filter(user_id=customer.id)
         
@@ -58,7 +58,7 @@ def order_all(request):
 def order_item(request, food_id):
     if request.user.is_authenticated:
         food = Food.objects.get(id=food_id)
-        user = Customer.objects.get(user_ptr_id=request.user.id)
+        user = Customer.objects.get(user_id=request.user.id)
         exists = Order.objects.filter(user=user, item=food)
         if exists:
             return redirect('orders')
@@ -80,7 +80,7 @@ def delete_from_orders(request, food_id):
 
 def orders(request):
     if request.user.is_authenticated:
-        orders = Order.objects.filter(user=Customer.objects.get(user_ptr_id=request.user.id))
+        orders = Order.objects.filter(user=Customer.objects.get(user_id=request.user.id))
         return render(request, 'order_app/orders.html', {'orders': orders})
     return redirect(user_views.login_page)
 

@@ -1,4 +1,3 @@
-from pickle import FALSE
 import random
 from django.core.mail import send_mail
 from django.conf import settings
@@ -30,12 +29,18 @@ def validateOtp(request):
     else:
         userotp = request.POST['otp']
         if generatedotp == userotp :
-            user = Customer.objects.get_or_create(
-                                    first_name=first_name,
-                                    last_name=last_name,
+            user = User.objects.get_or_create(
                                     email=email,
                                     phone=phone,
-                                    password=password)
+                                    password=password
+                                    )
+            
+            customer = Customer(
+                user = user,
+                first_name=first_name,
+                last_name=last_name,
+                user_id = user[0].id
+            )
             return redirect(user_view.login_page)
         
         else:
@@ -48,5 +53,5 @@ def resend_otp(request):
     print("----------------------------------") 
     print(user_list) 
     print("------------------------------")
-    opt = send_otp_via_email(email)
+    send_otp_via_email(email)
     return redirect('otp')

@@ -26,7 +26,7 @@ def register_customer(request):
         phone = request.POST['phone']
         password =make_password(request.POST['password'])
         try:
-            user = Customer.objects.get(phone=phone)
+            user = User.objects.get(phone=phone)
         except ObjectDoesNotExist:
             user=None
 
@@ -51,7 +51,7 @@ def login_user(request):
         user = authenticate(phone=phone, password=pass_key)
         
         if user and user.role == User.CUSTOMER:
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('landing_page')
         else:
             return HttpResponse(f"Oops! This user does not exist")

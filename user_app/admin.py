@@ -4,7 +4,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django import forms
 
 
-from user_app.models import Customer, Admin
+from user_app.models import Customer, User
 
     
 class CustomerAdmin(UserAdmin):
@@ -27,8 +27,8 @@ class CustomerAdmin(UserAdmin):
     filter_horizontal = ()
 
     
-admin.site.register(Customer, CustomerAdmin)
+admin.site.register(Customer)
 
 
-# admin.site.register(User)
+admin.site.register(User)
 # admin.site.register(Customer)
