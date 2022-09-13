@@ -35,8 +35,8 @@ def validateOtp(request):
                                     password=password
                                     )
             
-            customer = Customer(
-                user = user,
+            customer = Customer.objects.create(
+                user=user[0],
                 first_name=first_name,
                 last_name=last_name,
                 user_id = user[0].id

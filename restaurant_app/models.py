@@ -18,7 +18,7 @@ class Restaurant(models.Model):
 
     
 class RestaurantAdmin(models.Model):
-    restaurant_name = models.OneToOneField(Restaurant,on_delete=models.CASCADE,related_name='restaurant')
+    restaurant = models.OneToOneField(Restaurant,on_delete=models.CASCADE, related_name='restaurant')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin')
     email = models.EmailField(max_length=200, unique=True)
     role    = User.RESTAURANT_ADMIN
@@ -36,7 +36,7 @@ class RestaurantAdmin(models.Model):
         )
 
     def __str__(self):
-        return f"{self.restaurant_name}-{self.email}"
+        return f"{self.restaurant}-{self.email}"
 
 
 
