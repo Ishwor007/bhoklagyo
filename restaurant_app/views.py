@@ -24,9 +24,9 @@ def register_admin(data:dict, restaurant:Restaurant):
         is_staff = True,
         role = user_models.User.RESTAURANT_ADMIN,
     )
-    admin:RestaurantAdmin = RestaurantAdmin(
+    admin:RestaurantAdmin = RestaurantAdmin.objects.create(
         user = user,
-        restaurant_name=restaurant,
+        restaurant=restaurant,
     )
     
     send_mail(
@@ -76,7 +76,7 @@ def login_admin(request):
         
         if admin:
             login(request, admin)
-            return HttpResponse(f"Success path <strong>{admin}</strong>  authenticated : <strong>{admin.is_authenticated}</strong>")
+            return redirect('restro-admin')
         else:
             message = messages.error(request, "Unable to login. Please input valid credentials.")
             return render(request, 'restaurant_app/login-admin.html',{'message':message})
@@ -86,7 +86,7 @@ def login_admin(request):
     
 def logout_admin(request):
     logout(request)
-    return redirect('login')
+    return redirect('login-restaurant')
 
 def add_food(request):
     user = user_models.User.objects.get(id=request.user.id)
@@ -98,5 +98,5 @@ def add_food(request):
         return HttpResponse('You are not authorised to view this page.')
 
 # modified by shantosh upload by ashant for restaurant admin panel
-def restro_admin(request):
+def dashboard(request):
     return render(request, 'restaurant_app/admin-panel.html')

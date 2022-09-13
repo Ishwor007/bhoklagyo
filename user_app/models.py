@@ -30,7 +30,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     
 class Customer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer')
+    user:User = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer')
     first_name:str  = models.CharField(max_length=255)
     last_name:str   = models.CharField(max_length=255)
     
