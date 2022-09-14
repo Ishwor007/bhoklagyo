@@ -9,11 +9,11 @@ from django.conf import settings
 import random
 from .models import RestaurantAdmin, Restaurant
 from user_app import models as user_models
-
+from food_app.models import Food
 
 
 def register_admin(data:dict, restaurant:Restaurant):
-    email:str = data.get('name').replace(' ','').lower()+'@bhoklagyo.com'
+    email:str = data.get('name').replace(' ','').lower()+str(random.randint(0,999))+'@bhoklagyo.com'
     phone:str = data.get('phone')
     passkey_raw:str = str(data.get('name').replace(' ',''))+str(phone)
     random_pass:str = ''.join(random.choices(passkey_raw,k=10))
@@ -26,12 +26,13 @@ def register_admin(data:dict, restaurant:Restaurant):
     )
     admin:RestaurantAdmin = RestaurantAdmin.objects.create(
         user = user,
+        email = email,
         restaurant=restaurant,
     )
     
     send_mail(
         'Your password for Bhoklagyo',
-        f'Your password for Bhoklagyo with email {email} is <b>{random_pass}.\
+        f'Your password for Bhoklagyo with email {email} is {random_pass}.\
         Make sure you do not share it with anybody.',
         f'{settings.EMAIL_HOST_USER}',
         [f'bhattarais009@gmail.com'],
@@ -76,7 +77,7 @@ def login_admin(request):
         
         if admin:
             login(request, admin)
-            return redirect('restro-admin')
+            return redirect('dashboard')
         else:
             message = messages.error(request, "Unable to login. Please input valid credentials.")
             return render(request, 'restaurant_app/login-admin.html',{'message':message})
@@ -89,14 +90,31 @@ def logout_admin(request):
     return redirect('login-restaurant')
 
 def add_food(request):
-    user = user_models.User.objects.get(id=request.user.id)
-
-    if user:
-        return HttpResponse('This user can add food in menu')
-    
+    if request.method == 'POST':
+        user = RestaurantAdmin.objects.get(user_id=request.user.id)
+        print(f"{user=}")
+        if user:
+            name = request.POST.get('name')
+            price = request.POST.get('price')
+            image = request.FILES.get('image')
+            restaurant = Restaurant.objects.get(id=user.restaurant_id)
+            print(f"{name=} {price=}")
+            food = Food.objects.create(
+                name = name,
+                unit_price = price,
+                image = image,
+                restaurant_id = restaurant.id,
+                image_url = f'media/images/{image}',
+                slug = restaurant.restaurant_name.replace(' ','-').lower()+'-'+name.replace(' ','-').lower() 
+            )
+            return redirect('dashboard')
+        else: 
+            return redirect('login-restaurant')
     else:
-        return HttpResponse('You are not authorised to view this page.')
+        return redirect('dashboard')
 
 # modified by shantosh upload by ashant for restaurant admin panel
 def dashboard(request):
-    return render(request, 'restaurant_app/admin-panel.html')
+    restaurant_id=RestaurantAdmin.objects.get(user_id=request.user.id).restaurant_id
+    foods = Food.objects.filter(restaurant_id=restaurant_id)
+    return render(request, 'restaurant_app/admin-panel.html', {'foods':foods})
