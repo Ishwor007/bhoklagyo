@@ -10,7 +10,7 @@ class Food(models.Model):
     image_url = models.URLField(blank=True)
     unit_price = models.FloatField()
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    slug =models.SlugField(max_length=255, unique=True, null=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True)
 
     def __str__(self):
         return self.name

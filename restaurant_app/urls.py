@@ -9,6 +9,7 @@ urlpatterns = [
     path('register-restaurant', restaurant_views.register_restaurant, name='register-restaurant'),
     path('login-restaurant', restaurant_views.login_admin, name = 'login-restaurant'),
     path('dashboard', restaurant_views.dashboard, name="dashboard" ),
+    path('add-food', restaurant_views.add_food, name="add-food" ),
     path('logout-admin', restaurant_views.logout_admin, name = 'logout-admin'),
     # path('update_menu/<str:id>',restaurant_views.update_item, name = 'update-menu'),
 ]
