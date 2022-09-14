@@ -8,40 +8,38 @@
     
     <div class="row-add_items">
         <div class="col-add_items">
-            <form action="#" method="post">
+            <form action="{% url 'add-food' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                
                 <h1>Add Items</h1>
                 <div class="input_group">
-                <label for="" class="item_name">Name:</label>
+                <label for="name" class="item_name">Name:</label>
                 <input type="text" class="inputItemBox" name="name">
                 </div>
                 <div class="input_group">
-                <label for="" class="item_name">Price:</label>
+                <label for="price" class="item_name">Price:</label>
                 <input type="number" class="inputItemBox" name="price">
                 </div>
                 <div class="input_group">
-                <label for="" class="item_name item_image">Image:</label>
-                <input type="file" id="img" name="img" accept="image/*">
+                <label for="image" class="item_name item_image">Image:</label>
+                <input type="file" id="img" name="image">
                 </div>
                 <br>
 
                 <button class="btn-add" type="submit">
                     <i class="fa-solid fa-circle-plus"></i> Add
                 </button>
-            <form>
+            </form>
         </div>
         <hr style="margin-bottom: 10px;">
 
         <div class="row-menu">
             <div class="col-menu">
                 <h1>All Items </h1>
-                <form action="#" method="post">
-                    {% csrf_token %}
+                
                     <table>
                         <thead class="thead">
                             <tr class="table-row">
-                                <th class="table-heading">S.N.</th>
+                                {% comment %} <th class="table-heading">S.N.</th> {% endcomment %}
                                 <th class="table-heading">Name</th>
                                 <th class="table-heading">Price</th>
                                 <th class="table-heading">Controls</th>
@@ -49,86 +47,23 @@
                     
                         </thead>
                         <tbody class="tbody">
+                            {% for food in foods %}
                             <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
+                                {% comment %} <th class="table_data">1</th> {% endcomment %}
+                                <td class="table_data">{{food.name}}</td>
+                                <td class="table_data">Rs. {{food.unit_price}}</td>
                                 <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
+                                    <button class="tbtn">Edit</button>
+                                    <button class="tbtn">Delete</button>
                                 </td>
                             </tr>
-                            <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
-                                <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
-                                <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
-                                <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
-                                <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
-                                <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
-                                <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <th class="table_data">1</th>
-                                <td class="table_data">Chicken Momo</td>
-                                <td class="table_data">Rs. 120</td>
-                                <td class="buttons">
-                                    <button class="tbtn" type="edit">Edit</button>
-                                    <button class="tbtn" type="delete">Delete</button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
-                </form>
             </div>
         </div>
     </div>
-
-    <div.
+    <div>
 </div>
 
 

@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row-restaurant">
         <div class="col-restaurant">
-          <form action="/user_app/authenticate/" method="post">
+          <form action="/user_app/authenticate/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
           <h1 class="title-login">Login</h1>
           <br>

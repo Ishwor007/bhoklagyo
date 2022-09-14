@@ -8,7 +8,7 @@
                 <h2>Validate OTP (One Time Password)</h2>
                 <hr style="width:100%; margin: 10px 0;">
                 <h4>Enter your OTP you have received.</h4>
-                <form action="/authentication_app/otp/" method ="POST">
+                <form action="/authentication_app/otp/" method ="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="inputOTP">
                         <input type="text" name="otp">

@@ -10,16 +10,20 @@
         <div class="row-restaurant">
             <div class="col-restaurant">
                 <h1>Restaurant Register</h1>
-                <form action="{% url 'register-restaurant-form' %}" method="POST">  
+                <form action="{% url 'register-restaurant-form' %}" method="POST" enctype="multipart/form-data">  
                     {% csrf_token %}                  
                     <label class="details" for="restaurant_name">Restaurant Name:</label>
                     <input type="text" class="input-details" name="restaurant_name">
+
                     <label class="details" for="address">Restaurant Location:</label>
                     <input type="text" class="input-details" name="address">
+                    
                     <label class="details" for="phone">Contact Number:</label>
                     <input type="tel" pattern="9[0-9]{9}" class="input-details" name="phone">
+                    
                     <label class="details" for="pan">PAN Number:</label>
                     <input type="text" class="input-details" name="pan">
+                    
                     <input type="submit" class="register-button" value="Register">
                     {% comment %} <button type="submit" name="submit-btn">Submit Form</button> {% endcomment %}
 
