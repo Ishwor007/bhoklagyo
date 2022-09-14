@@ -8,22 +8,20 @@ from user_app.models import Customer
 from user_app import views as user_views
 
 def orders(request):
-    orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.filter(user=Customer.objects.get(user_id=request.user.id))
     return render(request, 'order_app/orders.html', {'orders': orders})
 
 def cart(request):
-    cart = Cart.objects.filter(user=request.user.id)
+    cart = Cart.objects.filter(user=Customer.objects.get(user_id=request.user.id))
     return render(request, 'order_app/cart.html', {'items': cart})
 
 def add_to_cart(request, food_id):
     if request.user.is_authenticated:
         food = Food.objects.get(id=food_id)
-        user = Customer.objects.get(user_ptr_id=request.user.id)
-        cart, created = Cart.objects.get_or_create(user=user, item=food)
-        
+        user = Customer.objects.get(user_id=request.user.id)
+        cart,created = Cart.objects.get_or_create(user=user, item=food)
         if created:
             cart.save()
-        
         return redirect('cart')
 
     return redirect(user_views.login_page)
