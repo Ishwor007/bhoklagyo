@@ -1,0 +1,40 @@
+{% load static %}
+<link rel="stylesheet" href="{% static './css/checkout.css' %}">
+
+<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+
+{% block  content %}
+    <h2>Checkout</h2>
+    <div class="row">
+        <div class="col-50">
+            <div class="container">
+                <form action="checkout" id="checkout-form" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Billing Address</h3>
+                            <label for="fname"><i class="fa fa-user"></i> first Name</label>
+                            <input type="text" id="fname" name="firstname" placeholder="John">
+                            
+                            <label for="fname"><i class="fa fa-user"></i> Last Name</label>
+                            <input type="text" id="fname" name="lastname" placeholder="Doe">
+                            
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input type="text" id="email" name="email" placeholder="john@example.com">
+                            
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+
+                            <button type="submit" class="btn btn-primary" >Submit Address</button>
+                        </div>
+                        
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}
+
+

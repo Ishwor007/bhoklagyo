@@ -39,7 +39,7 @@
                                 <label>{{food.restaurant.restaurant_name}}<span>{{food.restaurant.location}}</span></label> <!-- Restaurant Name -->
 
                                 <div class="price">Rs.<span>{{food.unit_price}}</span></div> <!-- Price -->
-
+                                
                                 <div>
                                     <a href=" {% url 'order_item' food.id %} "><input class="btn btn-primary" type="submit" value="Order Now"></input></a>
                                     <a href=" {% url 'add_to_cart' food.id %} "><input class="btn btn-primary" type="submit" value="Add to cart"></input></a>

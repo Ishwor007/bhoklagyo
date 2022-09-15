@@ -9,10 +9,12 @@ from user_app import views as user_views
 
 def orders(request):
     orders = Order.objects.filter(user=Customer.objects.get(user_id=request.user.id))
-    return render(request, 'order_app/orders.html', {'orders': orders})
+    total = sum([Food.objects.get(id=order.item_id).unit_price*order.quantity for order in orders])
+    return render(request, 'order_app/orders.html', {'orders': orders, 'total': total})
 
 def cart(request):
     cart = Cart.objects.filter(user=Customer.objects.get(user_id=request.user.id))
+    
     return render(request, 'order_app/cart.html', {'items': cart})
 
 def add_to_cart(request, food_id):
@@ -47,7 +49,6 @@ def order_all(request):
         
         for item in cart:
             if not item.item_id in order_ids:
-                print(f"Item: {item.item_id}")
                 Order.objects.create(user=customer, item_id=item.item_id, quantity=1)
 
         return redirect('orders')
@@ -84,13 +85,22 @@ def orders(request):
 
 def checkout(request):
     if request.user.is_authenticated:
-        return render(request, 'order_app/checkout.html')
+        orders = Order.objects.filter(user_id=Customer.objects.get(user_id=request.user.id))
+        total_orders = len(orders)
+        total = sum([Food.objects.get(id=order.item_id).unit_price*order.quantity for order in orders])
+        data =  {
+            'orders': orders, 
+            'total_orders': total_orders, 
+            'total': total
+        }
+        return render(request, 'order_app/checkout.html',data)
     return redirect(user_views.login_page)
 
 def billing_location(request):
     if request.user.is_authenticated:
-        full_name = request.POST['fullname']
-        address = request.POST['address']
-        email = request.POST['email']
-        return render(request, 'order_app/checkout.html')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        address = request.POST.get('address')
+        email = request.POST.get('email')
+        return render(request, 'order_app/billing_address.html')
     return redirect(user_views.login_page)
