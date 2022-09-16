@@ -27,7 +27,7 @@
                             <div class="item-price item-details">Rs. {{it.item.unit_price}}</div>
                         </div>
                         <div class="order-controls"style="margin-top:40px;">
-                            <a href=" {% url 'order_item' it.id %}">
+                            <a href=" {% url 'order_item' it.item_id %}">
                                 <input class="btn btn-primary" type="submit" value="Order Now">
                             </a>
                         </div>
@@ -57,10 +57,10 @@
 </div>
 <!-- cart end -->
 <script>
+    let total = document.getQuerySelector("#total-price");
     document.getElementById("subtract").addEventListener("click", function(){
         var quantity = document.getElementById("quantity").value;
         quantity = parseInt(quantity);
-        console.log(quantity);
         if(quantity > 1){
             quantity--;
             document.getElementById("quantity").value = quantity;
@@ -70,10 +70,9 @@
         var quantity = document.getElementById("quantity").value;
         quantity = parseInt(quantity);
         quantity++;
-        console.log(quantity);
         document.getElementById("quantity").value = quantity;
     });
-
+    for(let i =0; i<)
 </script>    
 
 {% endblock %}
