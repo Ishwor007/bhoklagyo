@@ -30,6 +30,9 @@
                             <a href=" {% url 'order_item' it.item_id %}">
                                 <input class="btn btn-primary" type="submit" value="Order Now">
                             </a>
+                            <a href=" {% url 'delete_from_cart' it.item_id %}">
+                                <input class="btn btn-primary" type="submit" value="Remove">
+                            </a>
                         </div>
                         
                     </div>

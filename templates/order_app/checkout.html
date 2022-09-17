@@ -16,7 +16,11 @@
                             <b>{{total_orders}}</b></span>
                         </h4>
                             {% for order in orders %}
-                            <p><a href="#">{{order.item.name}}</a> <span class="price">{{order.item.unit_price}}</span></p>
+                            <p>
+                                <a href="#">{{order.item.name}}</a> 
+                                
+                                <span class="price">{% widthratio order.quantity 1 order.item.unit_price %}</span>
+                            </p>
                             {% endfor %}
                             <hr>
                             <p>Total <span class="price" style="color:black"><b>{{total}}</b></span></p>
