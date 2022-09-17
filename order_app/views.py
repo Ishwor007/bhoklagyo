@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import permission_required
 
-from .models import Order, Cart
+from .models import Order, Cart, BillingLocation
 from food_app.models import Food
 from user_app.models import Customer
 
@@ -28,15 +28,14 @@ def add_to_cart(request, food_id):
 
     return redirect(user_views.login_page)
 
-def delete_from_cart(request, food_id):
+def delete_from_cart(request, cart_id):
     if request.user.is_authenticated:
 
-        cart = Cart.objects.get(id=food_id)
-        if cart.user_id == request.user.id:
+        cart = Cart.objects.get(item_id=cart_id)
+        if cart:
             cart.delete()
         #else show error message
         return redirect('cart')
-
     return redirect(user_views.login_page)
 
 def order_all(request):
@@ -62,15 +61,15 @@ def order_item(request, food_id):
         if exists:
             return redirect('orders')
         else:
-            order = Order.objects.create(user=user, item=food, quantity=1)
+            Order.objects.create(user=user, item=food, quantity=1)
             return redirect('orders')
     return redirect(user_views.login_page)
 
-def delete_from_orders(request, food_id):
+def delete_from_orders(request, order_id):
     if request.user.is_authenticated:
 
-        order = Order.objects.get(id=food_id)
-        if order.user_id == request.user.id:
+        order = Order.objects.get(id=order_id)
+        if order:
             order.delete()
         #else show error message
         return redirect('orders')
@@ -93,14 +92,39 @@ def checkout(request):
             'total_orders': total_orders, 
             'total': total
         }
+        
         return render(request, 'order_app/checkout.html',data)
     return redirect(user_views.login_page)
 
-def billing_location(request):
+def billing_location_form(request):
     if request.user.is_authenticated:
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        address = request.POST.get('address')
-        email = request.POST.get('email')
-        return render(request, 'order_app/billing_address.html')
+        if request.method == 'POST':
+            first_name = request.POST.get('firstname')
+            last_name = request.POST.get('lastname')
+            address = request.POST.get('address')
+            email = request.POST.get('email')
+            orders = Order.objects.filter(user_id=Customer.objects.get(user_id=request.user.id))
+
+            quantity = [request.POST.get(f'quantity-{order.id}') for order in orders]
+            
+            for i,order in enumerate(orders):
+                order.quantity = quantity[i]
+                order.save()
+                # BillingLocation.objects.create( order_id=order.id, 
+                #                     first_name=first_name, 
+                #                     last_name=last_name, 
+                #                     address=address, 
+                #                     email=email)
+            total_orders = len(orders)
+            total = sum([Food.objects.get(id=o.item_id).unit_price*float(q) for o,q in zip(orders,quantity)])
+            data =  {
+                'orders': orders, 
+                'total_orders': total_orders, 
+                'total': total
+            }
+            return render(request, 'order_app/checkout.html', data)
+        else:
+            return render(request, 'order_app/billing_address.html')
     return redirect(user_views.login_page)
+
+

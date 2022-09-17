@@ -10,6 +10,9 @@
             <hr>
             <div class="row-order-item">
                 <!-- one order item start -->
+                <form action = "billing_location_form" method="POST">
+                    {% csrf_token %}
+
                 {% if orders %}
                     {% for order in orders %}
                     <div class="col-order-item">
@@ -28,15 +31,15 @@
                         <div class="order-controls">
                             <div class="quantity">Quantity: {{order.quantity}}</div>
                             <div class="quantity-buttons">
-                                <button class="inde" id="subtract{{order.id}}" onClick="decrement({{order.id}})">
+                                <button class="inde" type="button" id="subtract{{order.id}}" onClick="decrement({{order.id}})">
                                     <i class="fa-solid fa-minus minus"></i>
                                 </button>
-                                <input class="qty-input" type="number" id="quantity{{order.id}}" name="quantity" value="{{order.quantity}}">
-                                <button class="inde" id="add{{order.id}}" onClick="increment({{order.id}})">
+                                <input class="qty-input" type="number" id="quantity{{order.id}}" name="quantity-{{order.id}}" value="{{order.quantity}}">
+                                <button class="inde" type="button" id="add{{order.id}}" onClick="increment({{order.id}})" >
                                     <i class="fa-solid fa-plus plus"></i>
                                 </button>
                                 <a href="{% url 'delete_from_orders' order.id %}"> 
-                                    <button class="delete" type="submit">
+                                    <button class="delete" type="button">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </button>
                                 </a> 
@@ -49,14 +52,15 @@
 
                 </div>
                     <!-- checkout button -->
-                    <div class="col-cart-checkout">
-                        <a href="{% url 'billing_location' %}">
-                            <button class="checkout-btn">Checkout</button>
-                        </a>
+                    <div class="col-cart-checkout" style="display:flex; justify-content: center; align-items: center;">
+                        
+                            <button class="inde" type="submit" style="height:40px; width:300px; background-color:#518C66; color:#eee; font-weight:400;">Checkout</button>
+                        
                     </div>
+                </form>
                 {% else %}
                 <div>
-                    <h3>No items in cart</h3>
+                    <h3>You have not ordered any item</h3>
                 </div>
                 {%endif%}
                 <!-- one order item end -->

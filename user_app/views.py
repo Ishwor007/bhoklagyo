@@ -40,7 +40,7 @@ def register_customer(request):
             return redirect(auth_views.validateOtp)
             
     else:
-        return HttpResponse('signup')
+        return redirect('signup')
 
 
 
