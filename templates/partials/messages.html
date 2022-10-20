@@ -1,0 +1,9 @@
+{% if messages %}
+<ul class="messagelist">
+    {% for message in messages %}
+        {% if message.error %}
+            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+        {% endif %}
+        
+    {% endfor %}</ul>
+{% endif %}

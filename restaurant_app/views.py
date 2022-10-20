@@ -1,3 +1,4 @@
+from smtplib import SMTPException
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -12,34 +13,48 @@ from user_app import models as user_models
 from food_app.models import Food
 
 
-def register_admin(data:dict, restaurant:Restaurant):
+def register_admin(data:dict):
     email:str = data.get('name').replace(' ','').lower()+str(random.randint(0,999))+'@bhoklagyo.com'
     phone:str = data.get('phone')
     passkey_raw:str = str(data.get('name').replace(' ',''))+str(phone)
     random_pass:str = ''.join(random.choices(passkey_raw,k=10))
-    user:user_models.User = user_models.User.objects.create(
-        email = email,
-        phone = phone,
-        password = make_password(random_pass),
-        is_staff = True,
-        role = user_models.User.RESTAURANT_ADMIN,
-    )
-    admin:RestaurantAdmin = RestaurantAdmin.objects.create(
-        user = user,
-        email = email,
-        restaurant=restaurant,
-    )
+
+    try:
+        send_mail(
+            subject='Your password for Bhoklagyo',
+            message=f'Your password for Bhoklagyo with email {email} is {random_pass}.\
+            Make sure you do not share it with anybody.',
+            from_email=f'{settings.EMAIL_HOST_USER}',
+            recipient_list=[f'bhattarais009@gmail.com'],
+            fail_silently=False,
+        )
+        user:user_models.User = user_models.User.objects.create(
+            email = email,
+            phone = phone,
+            password = make_password(random_pass),
+            is_staff = True,
+            role = user_models.User.RESTAURANT_ADMIN,
+        )
+
+        restaurant:Restaurant = Restaurant.objects.create(
+            restaurant_name = data.get('name'),
+            location = data.get('location'),
+            phone = data.get('phone'),
+            # pan = data.get('PAN')
+        )
+        admin:RestaurantAdmin = RestaurantAdmin.objects.create(
+            user = user,
+            email = email,
+            restaurant=restaurant,
+        ) 
+    except Exception as e:
+        return HttpResponse("Could not complete the process")
     
-    send_mail(
-        'Your password for Bhoklagyo',
-        f'Your password for Bhoklagyo with email {email} is {random_pass}.\
-        Make sure you do not share it with anybody.',
-        f'{settings.EMAIL_HOST_USER}',
-        [f'bhattarais009@gmail.com'],
-        fail_silently=False,
-    )
+ 
     
-def register_restaurant_form(request):
+
+    
+def register_restaurant(request):
     if request.method == 'POST':
         name = request.POST.get('restaurant_name','')
         location = request.POST.get('address','')
@@ -52,27 +67,16 @@ def register_restaurant_form(request):
             'phone':phone,
             'PAN':pan
         }
-        
-        restaurant = register_restaurant(data)
-        register_admin(data, restaurant)
+    
+        register_admin(data)
         return redirect('login-restaurant')
-    return render(request, 'restaurant_app/register.html')
-
-def register_restaurant(data):        
-    restaurant = Restaurant.objects.create(
-        restaurant_name = data.get('name'),
-        location = data.get('location'),
-        phone = data.get('phone'),
-        )
-
-    restaurant.save()
-    return restaurant
+    else:
+        return render(request, 'restaurant_app/register.html')
 
 def login_admin(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print(f"Email: {email} Password: {password} ")
         admin = authenticate(request, email=email, password=password, role=user_models.User.RESTAURANT_ADMIN)
         
         if admin:

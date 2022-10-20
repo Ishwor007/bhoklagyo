@@ -32,7 +32,6 @@
     padding: 5px 10px;
 }
 .row-add_items .col-add_items .item_name{
-    letter-spacing: 1px;
     /* color: red; */
     font-size: 18px;
     font-weight: bolder;
@@ -74,12 +73,7 @@
     border: 1px solid black;
 
 }
-.row-menu .col-menu table .thead{
 
-}
-.row-menu .col-menu table .tbody{
-    /* margin-bottom: 20px; */
-}
 .row-menu .col-menu .table-row{
     font-size: 18px;
     /* margin-bottom: 10px; */

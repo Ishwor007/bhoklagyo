@@ -16,10 +16,10 @@
                             <a href="{% url 'home_page' %}" class="nav-link">Home </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'cart' %}" class="nav-link">Cart</a>
+                            <a href="{% url 'cart' %}" class="nav-link"><i class="fa-sharp fa-solid fa-basket-shopping"></i><span ><sup>{{user.order.count}}</sup></span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'logout' %}" id="button" class="nav-link">Logout ({{user.customer.first_name }})</a> <!-- login id is here -->
+                            <a href="{% url 'logout' %}" id="button" class="nav-link">logout</a> <!-- login id is here -->
                         </li>
                     {% endif %}
                     

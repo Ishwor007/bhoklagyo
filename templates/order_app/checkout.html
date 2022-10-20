@@ -1,10 +1,16 @@
 {% load static %}
-<link rel="stylesheet" href="{% static './css/checkout.css' %}">
+
+<title>Checkout</title>
+{% block css %}<link rel="stylesheet" href="{% static './css/checkout.css' %}">{% endblock css %}
 
 <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
 
 {% block  content %}
-    <h2>Checkout</h2>
+    <div class="top">
+        <h2>Checkout</h2>
+        <a href="{% url 'orders' %}" class="goto-orders">Goto Orders Page</a>
+    </div>
+    {% if orders %}
     <div class="row">
         <div class="col-50">
             <div class="container">
@@ -31,13 +37,15 @@
         </div>
     </div>
     
-    
+    {%endif%}
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
     <script>
         var config = {
             "publicKey": "test_public_key_ee8f489a141a44c0b7922037df48d668",
             "productIdentity": "1234567890",
             "productName": "fdsfdsfd",
-            "productUrl": "http://gameofthrones.wikia.com/wiki/Rhaegar_Targaryen",
+            "productUrl": "http://localhost:8000/food_app/home",
             "paymentPreference": [
                 "KHALTI",
                 "EBANKING",
@@ -45,15 +53,24 @@
                 ],
             "eventHandler": {
                 onSuccess (payload) {
-                    // hit merchant api for initiating verfication
-                    console.log(payload);
+                    console.log(payload)
+                    let params ={
+                        "amount":payload.amount,
+                        "p_id":payload.product_identity,
+                        "p_name":payload.product_name,
+                        "token":payload.token
+                    }
+                    axios.get('/order_app/verify-payment/',{
+                        params
+                    }).then(response=>{
+                            window.location.href="{% url 'billing_location' %}"
+                            console.log(response.data)
+                        })
                 },
                 onError (error) {
-                    console.log(error);
-                },
-                onClose () {
-                    console.log('widget is closing');
+                    console.log(error)
                 }
+
             }
         };
         
