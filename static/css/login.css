@@ -52,7 +52,6 @@ section .contentBx .formBx h2{
     margin-bottom: 20px;
     border-bottom: 4px solid #ff4584;
     display: inline-block;
-    letter-spacing: 2px;
 }
 section .contentBx .formBx .inputBx{
     margin-bottom: 20px;
@@ -63,7 +62,6 @@ section .contentBx .formBx .inputBx span{
     display: inline-block;
     color: #607d8b;
     font-weight: 300;
-    letter-spacing: 1px;
 }
 section .contentBx .formBx .inputBx input{
     width: 100%;
@@ -72,7 +70,6 @@ section .contentBx .formBx .inputBx input{
     font-weight: 400;
     border: 1px solid #607d8b;
     font-size: 16px;
-    letter-spacing: 1px;
     color: #607d8b;
     background: transparent;
     border-radius: 30px;
@@ -93,7 +90,6 @@ section .contentBx .formBx .remember{
     font-weight: 400;
     font-size: 14px;
     color: #607d8b;
-    letter-spacing: 1px;
 }
 section .contentBx .formBx p{
     color: #607d8b;
@@ -125,7 +121,6 @@ section .contentBx .formBx .soc li{
     width: 40%;
     text-align: center;
     font-weight: 400;
-    letter-spacing: 1px;
     color: #fff;
     list-style-type: none;
     cursor: pointer;
@@ -146,7 +141,120 @@ section .contentBx .formBx p{
     align-items: center;
     color: #607d8b;
 }
+
+.login-button{
+    background: #fff;
+    padding: 10px 15px;
+    color: #34495e;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.4s;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-left: 55px;
+    border:3px solid #ff4548;
+}
+.login-button:hover{
+    background: #ff4548;
+    color: #fff;
+}
+
+.title-login{
+    position: relative;
+    margin-left: 140px;
+    font-size: bolder;
+}
+.title-login::before{
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 75px;
+    top: 100%;
+    left: 42%;
+    /* color: green; */
+    bottom: 0;
+    background: #554b4b;
+}
+
+.close{
+    position: absolute;
+    top:-15px;
+    right: -15px;
+    background: #fff;
+    height: 20px;
+    width:20px;
+    border-radius: 50%;
+    box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+    cursor: pointer;
+}
+
+.reg-details{
+    font-size: 18px;
+    font-weight: bolder;
+    margin-left: 55px;
+}
+.inputBox{
+    height: 45px;
+    width: 60%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 3px;
+    transition: all 0.3s ease;
+    display: block;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin: 10px 50px 20px 55px;
+}
+.other-details{
+    margin-left: 55px;
+}
+
+.forgot-password{
+    display: block;
+    margin:20px 0 5px 55px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
+}
+.forgot-password:hover{
+    text-decoration: underline;
+    transition: all 0.5 ease;
+}
+
+.signup{
+    font-size: 16px;
+    margin-left: 55px;
+    margin-bottom: 5px;
+}
+.signup-link{
+    text-decoration: none;
+    cursor: pointer;
+    color:#ff4548;
+}
+.other{
+    margin-left: 55px;
+}
+
+.number::-webkit-outer-spin-button,
+.number::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+
 @media (max-width: 768px){
+    .popup-content {
+        width: 320px;
+    }
+    .inputBox {
+        width: 80%;
+    }
     section .imgBx {
         position: absolute;
         width: 100%;

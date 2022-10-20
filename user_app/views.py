@@ -3,13 +3,12 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.contrib.auth.decorators import login_required
 
 from authentication_app import views as auth_views
 from .models import Customer,User
-
+from order_app.models import Order
 # Create your views here.
 
 def signup_page(request):
@@ -60,3 +59,9 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def rate_food(request, food_id):
+    user = Customer.objects.get(user_id = request.user.id)
+    food = Order.objects.get(food_id = food_id)
+    

@@ -1,10 +1,16 @@
 {% extends 'food_app/base.html' %}
 {% load static %}
 
-{% load socialaccount %}
+{% block css %}
+  <link rel="stylesheet" href="{% static './css/restro_signup.css' %}">
+  <link rel="stylesheet" href="{% static './css/login.css' %}">
+
+{% endblock css %}
 
   <!-- login start -->
-{% block title %} Login | Bhoklagyo {% endblock %}
+{% block title %} Login {% endblock %}
+
+
 
 {% block content %}
     <div class="container">
@@ -14,9 +20,9 @@
             {% csrf_token %}
           <h1 class="title-login">Login</h1>
           <br>
-          <label class="reg-details">Phone</label>
+          <label class="reg-details" for="phone">Phone</label>
           <input class="inputBox number" type="tel" pattern="9[0-9]{9}" placeholder="98XXXXXXXX" name="phone">
-          <label class="reg-details">Password</label>
+          <label class="reg-details" for="password">Password</label>
           <input class="inputBox" type="password" name="password">
           <br>
           <button type="submit" class="login-button">Login</button>
@@ -31,4 +37,3 @@
   </div>
 
 {% endblock %}
-

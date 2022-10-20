@@ -1,10 +1,14 @@
 {% extends 'food_app/base.html' %}
 
 {% load static %}
-{% block title %} Restaurant | Bhoklagyo {% endblock %}
+{% block title %} Login  {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static './css/restro_signup.css' %}">
+    <link rel="stylesheet" href="{% static './css/login.css' %}">
+{% endblock css %}
 
 {% block content%}
-    <!-- popip login start -->
     <div class="container">
         <div class="row-restaurant">
             <div class="col-restaurant">
@@ -17,6 +21,9 @@
                     <input class="inputBox" type="email" name="email">
                     <label class="reg-details">Password</label>
                     <input class="inputBox" type="password" name="password">
+                    
+                    {% include '../partials/messages.html' %}
+
                     <br>
                     <input type="submit" class="login-button">
                     <a href="#" class="forgot-password">Forgot password?</a>

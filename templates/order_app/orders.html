@@ -1,6 +1,9 @@
 {% extends 'food_app/base.html' %}
 {% load static %}
 
+{% block title %}Orders{% endblock title %}
+{% block css %}<link rel="stylesheet" href="{% static './css/cart.css' %}">{% endblock css %}
+
 {% block content %}
 <!-- cart start -->
 <div class="container-cart">
@@ -10,58 +13,56 @@
             <hr>
             <div class="row-order-item">
                 <!-- one order item start -->
-                <form action = "billing_location_form" method="POST">
-                    {% csrf_token %}
-
                 {% if orders %}
-                    {% for order in orders %}
-                    <div class="col-order-item">
-                        <img src="http://localhost:8000{{order.item.image.url}}" class="img-item" alt="item-image">
-                        <div class="order-item-details">
-                            <div class="item-details">{{it.item.restaurant.restaurant_name}}</div>
-                            <div class="stars item-details">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <div class="item-details">{{order.item.name}}</div>
-                            <div class="item-price item-details" id= "unit_price{{order.id}}">Rs. {{order.item.unit_price}}</div>
-                        </div>
-                        <div class="order-controls">
-                            <div class="quantity">Quantity: {{order.quantity}}</div>
-                            <div class="quantity-buttons">
-                                <button class="inde" type="button" id="subtract{{order.id}}" onClick="decrement({{order.id}})">
-                                    <i class="fa-solid fa-minus minus"></i>
-                                </button>
-                                <input class="qty-input" type="number" id="quantity{{order.id}}" name="quantity-{{order.id}}" value="{{order.quantity}}">
-                                <button class="inde" type="button" id="add{{order.id}}" onClick="increment({{order.id}})" >
-                                    <i class="fa-solid fa-plus plus"></i>
-                                </button>
-                                <a href="{% url 'delete_from_orders' order.id %}"> 
-                                    <button class="delete" type="button">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </a> 
-                            </div>
-                            <div class="total">Total: Rs. <span id="total{{order.id}}">{% widthratio order.quantity 1 order.item.unit_price %}</span></div>
-                        </div>
-                        
-                    </div>
-                    {% endfor %}
+                    <form action = "{% url 'checkout' %}" method="POST">
+                        {% csrf_token %}
+                        {% for order in orders %}
+                            <div class="col-order-item">
+                                <img src="http://localhost:8000{{order.item.image.url}}" class="img-item" alt="item-image">
+                                <div class="order-item-details">
+                                    <div class="item-details">{{it.item.restaurant.restaurant_name}}</div>
+                                    <div class="stars item-details">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="item-details">{{order.item.name}}</div>
+                                    <div class="item-price item-details" id= "unit_price{{order.id}}">Rs. {{order.item.unit_price}}</div>
+                                </div>
+                                <div class="order-controls">
+                                    {% comment %} <div class="quantity" id="total_items">Quantity: {{order.quantity}}</div> {% endcomment %}
+                                    <div class="quantity-buttons">
+                                        <button class="inde" type="button" id="subtract{{order.id}}" onClick="decrement({{order.id}})">
+                                            <i class="fa-solid fa-minus minus"></i>
+                                        </button>
+                                        <input class="qty-input" type="number" id="quantity{{order.id}}" name="quantity-{{order.id}}" value="{{order.quantity}}">
+                                        <button class="inde" type="button" id="add{{order.id}}" onClick="increment({{order.id}})" >
+                                            <i class="fa-solid fa-plus plus"></i>
+                                        </button>
+                                        <a href="{% url 'delete_from_orders' order.id %}"> 
+                                            <button class="delete" type="button">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </a> 
+                                        <span style="background-color:#44aabb;">{{order.order_status}}</span>
 
-                </div>
+                                    </div>
+                                    <div class="total">Total: Rs. <span id="total{{order.id}}">{% widthratio order.quantity 1 order.item.unit_price %}</span></div>
+                                </div>
+                                
+                            </div>
+                        {% endfor %}
+
                     <!-- checkout button -->
-                    <div class="col-cart-checkout" style="display:flex; justify-content: center; align-items: center;">
-                        
-                            <button class="inde" type="submit" style="height:40px; width:300px; background-color:#518C66; color:#eee; font-weight:400;">Checkout</button>
-                        
-                    </div>
-                </form>
+                        <div class="col-cart-checkout">     
+                            <button class="inde order-btn" type="submit" >Checkout</button>
+                        </div>
+                    </form>
                 {% else %}
-                <div>
-                    <h3>You have not ordered any item</h3>
-                </div>
+                    <div>
+                        <h3>You have not ordered any item</h3>
+                    </div>
                 {%endif%}
                 <!-- one order item end -->
             </div>
@@ -74,6 +75,7 @@
 </div>
 <!-- cart end -->
 <script>
+    let total_items = document.querySelector('#total_items');
     function decrement(id){
         var quantity = document.getElementById("quantity"+id).value;
         var unit_price = document.getElementById("unit_price"+id).innerHTML;

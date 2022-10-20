@@ -1,6 +1,12 @@
 {% extends 'food_app/base.html' %}
+{% load static %}
 
 {% block title %}OTP | Bhoklagyo {% endblock %}
+
+{% block css %}    
+    <link rel="stylesheet" href="{% static './css/otp.css' %}">
+{% endblock css %}
+
 {% block content %}
     <section class="container-80">
         <div class="row-otp">

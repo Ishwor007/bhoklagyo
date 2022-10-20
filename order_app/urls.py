@@ -8,9 +8,10 @@ urlpatterns = [
     path('order_all/', order_views.order_all, name='order_all'),
     path('order_item/<int:food_id>/', order_views.order_item, name='order_item'),
     path('delete_from_orders/<int:order_id>/', order_views.delete_from_orders, name='delete_from_orders'),
-    path('orders', order_views.orders, name='orders'),
-    path('checkout', order_views.checkout, name='checkout'),
-    path('billing_location_form', order_views.billing_location_form, name='billing_location'),
+    path('orders/', order_views.orders, name='orders'),
+    path('checkout/', order_views.checkout, name='checkout'),
+    path('verify-payment/', order_views.verify_payment, name="verify_payment"),
+    path('billing_location_form/', order_views.billing_location_form, name='billing_location'),
 
 ]
 

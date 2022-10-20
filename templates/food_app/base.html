@@ -6,39 +6,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static './css/style.css' %}">
-    <link rel="stylesheet" href="{% static './css/footer.css' %}">
-    <link rel="stylesheet" href="{% static './css/login.css' %}">
-    <link rel="stylesheet" href="{% static './css/otp.css' %}">
-    <link rel="stylesheet" href="{% static './css/cart.css' %}">
-    <link rel="stylesheet" href="{% static './css/home.css' %}">
-    <link rel="stylesheet" href="{% static './css/order_table.css' %}">
-    <link rel="stylesheet" href="{% static './css/popup.css' %}">
-    <link rel="stylesheet" href="{% static './css/restro_admin.css' %}">
-    <link rel="stylesheet" href="{% static './css/restro_signup.css' %}">
-    <link rel="stylesheet" href="{% static './css/validate.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+    <title>Bhoklagyo | {% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static './css/footer.css' %}">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+    <link rel="stylesheet" href="{% static './css/home.css' %}">
+
+    {% block css %}{% endblock css %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 </head>
 
 <body>
-    {% include './nav.html' %}
+    {% include '../partials/nav.html' %}
     <main class="main">
-    {% if messages %}
-        <ul class="messagelist">{% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-    {% endfor %}</ul>
-    {% endif %}
 
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
 
-    {% include './footer.html' %}
+    {% include '../partials/footer.html' %}
     <script src="{% static './js/script.js' %}"></script>
+    {% block javascript %}{% endblock javascript %}
 </body>
 
 </html>

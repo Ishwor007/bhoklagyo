@@ -30,5 +30,5 @@ class CustomerAdmin(UserAdmin):
 admin.site.register(Customer)
 
 
-admin.site.register(User)
+# admin.site.register(User)
 # admin.site.register(Customer)
