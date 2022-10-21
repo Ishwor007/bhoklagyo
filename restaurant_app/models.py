@@ -16,7 +16,9 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.restaurant_name
 
-    
+    class Meta:
+        db_table = 'restaurant'
+
 class RestaurantAdmin(models.Model):
     restaurant = models.OneToOneField(Restaurant,on_delete=models.CASCADE, related_name='restaurant')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin')
@@ -30,14 +32,13 @@ class RestaurantAdmin(models.Model):
     
     class Meta:
         verbose_name = 'Admin'
-        db_table     = 'Admin'
+        db_table     = 'restaurant_admin'
         permissions = (
             
         )
 
     def __str__(self):
         return f"{self.restaurant}-{self.email}"
-
 
 
 

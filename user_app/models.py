@@ -38,7 +38,7 @@ class Customer(models.Model):
     REQUIRED_FIELDS: list   =['password']
 
     class Meta:
-        db_table        = 'Customer'
+        db_table        = 'customers'
         verbose_name    = 'Customer'
         
 
