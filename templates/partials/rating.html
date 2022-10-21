@@ -17,20 +17,20 @@
         <hr />
         <div class="row-order-item">
           <!-- one order item start -->
-          {% for order in orders %}
+          {% for food in foods %}
           <div class="col-order-item">
             <img
-              src="http://localhost:8000{{order.item.image.url}}"
+              src="http://localhost:8000{{food.image.url}}"
               class="img-item"
               alt="{{food.restaurant.restaurant_name}}'s product {{food.name}}"
             />
             <div class="order-item-details">
-              <div class="item-details">{{order.item.restaurant.restaurant_name}}</div>
-              <div class="item-details">{{order.item.name}}</div>
-              <div class="item-price item-details">Rs. {{order.item.unit_price}}</div>
+              <div class="item-details">{{food.restaurant.restaurant_name}}</div>
+              <div class="item-details">{{food.name}}</div>
+              <div class="item-price item-details">Rs. {{food.unit_price}}</div>
             </div>
             <div class="order-controls">
-            {% ratings order %}
+            {% ratings food %}
             </div>
           </div>
           {% endfor %}

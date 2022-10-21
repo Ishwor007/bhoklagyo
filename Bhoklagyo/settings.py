@@ -13,8 +13,9 @@ if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
 # UPDATE secret key
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-KHALTI_SECRET_KEY = os.environ['KHALTI_SECRET_KEY']
+# SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = 'django-insecure-2_ihj3%*-8bb$)lvjmj%z(ey!p)vablmb#zpz^44$s22h+uu6e'
+# KHALTI_SECRET_KEY = os.environ['KHALTI_SECRET_KEY']
 
 
 KHALTI_VERIFY_URL = "https://khalti.com/api/v2/payment/verify/"

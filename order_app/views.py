@@ -149,6 +149,6 @@ def verify_payment(request):
 def rating(request):
     customer = Customer.objects.get(user_id=request.user.id)
     orders = Order.objects.filter(user_id=customer, order_status__in=(Order.DELIVERED, Order.PENDING))
-    # orders = Order.objects.all()
+    foods = Food.objects.filter(id__in=[order.item_id for order in orders])
 
-    return render(request, 'partials/rating.html', {'orders': orders})
+    return render(request, 'partials/rating.html', {'foods': foods})
