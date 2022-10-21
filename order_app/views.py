@@ -3,13 +3,13 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-import secrets 
+from django.dispatch import receiver
+from django.core.signals import request_finished
 
 from .models import Order, Cart, BillingLocation
 from food_app.models import Food
 from user_app.models import Customer
 
-from user_app import views as user_views
 
 @login_required
 def orders(request):
@@ -36,7 +36,7 @@ def add_to_cart(request, food_id):
 
 @login_required
 def delete_from_cart(request, cart_id):
-    cart = Cart.objects.get(item_id=cart_id)
+    cart = Cart.objects.get(id=cart_id)
     if cart:
         cart.delete()
     return redirect('cart')
@@ -95,6 +95,9 @@ def checkout(request):
         'total_orders': total_orders, 
         'total': total
     }
+    for order in orders:
+        order.order_status = Order.ACCEPTED
+        order.save()
     
     return render(request, 'order_app/checkout.html',data)
 
@@ -107,7 +110,7 @@ def billing_location_form(request):
         address = request.POST.get('address')
         email = request.POST.get('email')
         
-        orders = Order.objects.filter(user_id=customer, order_status=Order.PENDING)
+        orders = Order.objects.filter(user_id=customer, order_status=Order.ACCEPTED)
         
         BillingLocation.objects.create(
                             request_id=orders[0].request_id,
@@ -137,3 +140,15 @@ def verify_payment(request):
     if id:
         return JsonResponse({"success":True})
     return JsonResponse({'success':False})
+
+# @receiver(request_finished)
+# def rate_product_handler(verify_payment, **kwargs):
+#     print("rate_product_handler")
+
+@login_required
+def rating(request):
+    customer = Customer.objects.get(user_id=request.user.id)
+    orders = Order.objects.filter(user_id=customer, order_status__in=(Order.DELIVERED, Order.PENDING))
+    # orders = Order.objects.all()
+
+    return render(request, 'partials/rating.html', {'orders': orders})

@@ -28,6 +28,9 @@ class Order(models.Model):
     def __str__(self):
         return f"{self.user}-{self.id}"
 
+    class Meta:
+        db_table = 'orders'
+
 class Cart(models.Model):
     user = models.ForeignKey(to = Customer, on_delete=models.CASCADE)
     item = models.ForeignKey(to = Food, on_delete=models.CASCADE)
@@ -35,9 +38,15 @@ class Cart(models.Model):
     def __str__(self):
         return f"{self.user}-{self.id}"
 
+    class Meta:
+        db_table = 'cart'
+
 class BillingLocation(models.Model):
     address = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     request_id = models.CharField(max_length=100, unique=True)
     email = models.EmailField()
+
+    class Meta:
+        db_table = 'billing_location'
