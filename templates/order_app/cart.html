@@ -1,90 +1,101 @@
-{% extends 'food_app/base.html' %}
+{% extends 'food_app/base.html' %} {% load static %} 
 
-{% load static %}
+{% block title %}Cart{%endblock title %} 
 
-{% block title %}Cart{% endblock title %}
 {% block css %}
-    <link rel="stylesheet" href="{% static './css/cart.css' %}">
-{% endblock css %}
+<link rel="stylesheet" href="{% static './css/cart.css' %}" />
+{% endblock css %} 
 
 {% block content %}
 <!-- cart start -->
-<div class="container-cart">
-    <div class="row-cart">
-        <div class="col-cart-main">
-            <div class="top">
-                <h2 class="resto-name"> Cart</h2>
-                <a href="{% url 'orders' %}" class="goto-orders">Go to Orders</a>
+	<div class="container-cart">
+		<div class="row-cart">
+			<div class="col-cart-main">
+				<div class="top">
+					<h2 class="resto-name">Cart</h2>
+					<a href="{% url 'orders' %}" class="goto-orders">Go to Orders</a>
+				</div>
+				<hr />
+				<div class="row-order-item">
+					<!-- one order item start -->
+					{% if items %} {% for it in items %}
+					<div class="col-order-item">
+						<img
+							src="http://localhost:8000{{it.item.image.url}}"
+							class="img-item"
+							alt="item-image"
+						/>
+						<div class="order-item-details">
+							<div class="item-details">
+								{{it.item.restaurant.restaurant_name}}
+							</div>
+							<div class="stars item-details">
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+							</div>
+							<div class="item-details">{{it.item.name}}</div>
+							<div class="item-price item-details">
+								Rs. {{it.item.unit_price}}
+							</div>
+						</div>
+						<div class="order-controls" style="margin-top: 40px">
+							{% comment %}
+							<a href=" {% url 'order_item' it.item_id %}">
+								<input class="btn btn-primary" type="submit" value="Order Now" />
+							</a>
+							{% endcomment %}
+							<div class="quantity-buttons">
+								<a href="{% url 'delete_from_cart' it.id %}">
+									<button class="delete" type="button">
+										<i class="fa-solid fa-trash-can"></i>
+									</button>
+								</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
 
-            </div>
-            <hr>
-            <div class="row-order-item">
-                <!-- one order item start -->
-                {% if items %}
-                    {% for it in items %}
-                    <div class="col-order-item">
-                        <img src="http://localhost:8000{{it.item.image.url}}" class="img-item" alt="item-image">
-                        <div class="order-item-details">
-                            <div class="item-details">{{it.item.restaurant.restaurant_name}}</div>
-                            <div class="stars item-details">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <div class="item-details">{{it.item.name}}</div>
-                            <div class="item-price item-details">Rs. {{it.item.unit_price}}</div>
-                        </div>
-                        <div class="order-controls"style="margin-top:40px;">
-                            <a href=" {% url 'order_item' it.item_id %}">
-                                <input class="btn btn-primary" type="submit" value="Order Now">
-                            </a>
-                            <a href=" {% url 'delete_from_cart' it.item_id %}">
-                                <input class="btn btn-primary" type="submit" value="Remove">
-                            </a>
-                        </div>
-                        
-                    </div>
-                    {% endfor %}
-
-                        <!-- checkout button -->
-                        <div>
-                            <a href=" {% url 'order_all' %} ">
-                                <input class="btn btn-primary order-btn" type="submit" value="Order all">
-                            </a>
-                        </div>
-                {% else %}
-                    <div>
-                        <h3>No items in cart</h3>
-                    </div>
-                {% endif %}
-                <!-- one order item end -->
-            </div>
-
-        </div>
-        <div class="col-cart-mid">
-
-        </div>
-    </div>
-</div>
-<!-- cart end -->
-<script>
-    let total = document.getQuerySelector("#total-price");
-    document.getElementById("subtract").addEventListener("click", function(){
-        var quantity = document.getElementById("quantity").value;
-        quantity = parseInt(quantity);
-        if(quantity > 1){
-            quantity--;
-            document.getElementById("quantity").value = quantity;
-        }
-    });
-    document.getElementById("add").addEventListener("click", function(){
-        var quantity = document.getElementById("quantity").value;
-        quantity = parseInt(quantity);
-        quantity++;
-        document.getElementById("quantity").value = quantity;
-    });
-    for(let i =0; i<)
-</script>    
+					<!-- checkout button -->
+					<div>
+						<a href=" {% url 'order_all' %} ">
+							<input
+								class="btn btn-primary order-btn"
+								type="submit"
+								value="Order all"
+							/>
+						</a>
+					</div>
+					{% else %}
+					<div>
+						<h3>No items in cart</h3>
+					</div>
+					{% endif %}
+					<!-- one order item end -->
+				</div>
+			</div>
+			<div class="col-cart-mid"></div>
+		</div>
+	</div>
+	<!-- cart end -->
+	<script>
+		let total = document.getQuerySelector("#total-price");
+		document.getElementById("subtract").addEventListener("click", function(){
+				var quantity = document.getElementById("quantity").value;
+				quantity = parseInt(quantity);
+				if(quantity > 1){
+						quantity--;
+						document.getElementById("quantity").value = quantity;
+				}
+		});
+		document.getElementById("add").addEventListener("click", function(){
+				var quantity = document.getElementById("quantity").value;
+				quantity = parseInt(quantity);
+				quantity++;
+				document.getElementById("quantity").value = quantity;
+		});
+		for(let i =0; i<)
+	</script>
 
 {% endblock %}

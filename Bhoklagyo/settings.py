@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     #khalti
     'khalti',
 
+    #star rating
+    'star_ratings',
+
 ]
 
 

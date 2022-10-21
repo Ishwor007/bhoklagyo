@@ -1,0 +1,47 @@
+{% extends '../food_app/base.html' %} {% load static %} {% load ratings %} 
+
+{%block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'star-ratings/css/star-ratings.css' %}"
+/>
+<link rel="stylesheet" href="{% static './css/cart.css' %}" />
+{% endblock %} 
+
+{% block content %}
+
+  <div class="container-cart">
+    <div class="row-cart">
+      <div class="col-cart-main">
+        <h2 class="resto-name">Your Ratings</h2>
+        <hr />
+        <div class="row-order-item">
+          <!-- one order item start -->
+          {% for order in orders %}
+          <div class="col-order-item">
+            <img
+              src="http://localhost:8000{{order.item.image.url}}"
+              class="img-item"
+              alt="{{food.restaurant.restaurant_name}}'s product {{food.name}}"
+            />
+            <div class="order-item-details">
+              <div class="item-details">{{order.item.restaurant.restaurant_name}}</div>
+              <div class="item-details">{{order.item.name}}</div>
+              <div class="item-price item-details">Rs. {{order.item.unit_price}}</div>
+            </div>
+            <div class="order-controls">
+            {% ratings order %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-cart-mid"></div>
+    </div>
+  </div>
+  <script
+    type="text/javascript"
+    src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"
+  ></script>
+
+{% endblock content %}

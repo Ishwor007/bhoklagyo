@@ -14,6 +14,9 @@ urlpatterns = [
     path('authentication_app/', include('authentication_app.urls')),
     path('restaurant_app/', include('restaurant_app.urls')),
     path('order_app/', include('order_app.urls')),
+
     path('khalti/', include('khalti.urls')),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
+
 
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
